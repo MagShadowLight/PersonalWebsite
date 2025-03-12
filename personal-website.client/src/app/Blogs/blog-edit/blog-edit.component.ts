@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Blogs } from '../../models/IBlogs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, switchMap } from 'rxjs';
@@ -11,11 +11,11 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   templateUrl: './blog-edit.component.html',
   styleUrl: './blog-edit.component.css'
 })
-export class BlogEditComponent implements OnInit {
+export class BlogEditComponent implements OnInit, OnDestroy {
   blog: Blogs = {
       id: -1,
-      displayName: 'Taco',
-      title: 'Taco',
+      displayName: '',
+      title: '',
       body: 'Lorem Ispum',
       createdDate: new Date(),
       updatedDate: new Date(),
@@ -39,26 +39,43 @@ export class BlogEditComponent implements OnInit {
         this.getBlogData();
       }
     });
+
   }
+    ngOnDestroy(): void {
+       
+    }
 
   ngOnInit(): void {
+
+
+    
     this.initForm();
+    
   }
 
   getBlogData() : void {
     this.route.paramMap.subscribe(getId => {
       this.blog.id = +getId.get('id')!;
     });
+    console.log(this.blog.id)
 
-    this.isEditing = (this.blog.id == null || this.blog.id == -1) ? false : true;
+    //this.isEditing = (this.blog.id == null || this.blog.id == -1) ? false : true;
 
-    if (this.isEditing && this.blog.id != null && this.blog.id != -1) {
+    if (this.blog.id <= 0) {
+      this.isEditing = false;
+    } else {
+      this.isEditing = true;
+    }
+    
+    console.log(this.isEditing)
+    if (this.isEditing && this.blog.id != null && this.blog.id != 0) {
       this.data.getBlogInfoById(this.blog.id).subscribe((blogs : Blogs) => {
         this.blog = blogs;
 
         console.log(
-          `Name: ${this.blog.title}\n
-          Description: ${this.blog.body}`);
+          `Title: ${this.blog.title}\n
+          Body: ${this.blog.body}`);
+        this.loadForm(this.blog);
       },
       error => console.error('Error fetching Blogs.', error)
       );
@@ -67,42 +84,50 @@ export class BlogEditComponent implements OnInit {
 
 
 
-  //initFormAsEmpty() {
-  //  this.blogForm = this.formBuilder.group({
-  //    id: [this.blog.id],
-  //    displayName: ['Taco'],
-  //    title: ['Taco'],
-  //    body: ['Lorem Ispum'],
-  //    createdDate: [new Date()],
-  //    updatedDate: [new Date()],
-  //    visibility: [0],
-  //    categoryId: [0],
-  //    category: [{
-  //      categoryId: [0],
-  //      categoryName: [' '],
-  //      parentCategoryId: [0],
-  //      PostedBlogs: [],
-  //      PostedItems: []
-  //    }]
-  //  });
-
-  //  this.isEditing = false;
-  //}
-
   initForm() {
-    this.blogForm.patchValue({
-      title: new FormControl(this.blog.title),
-      displayName: new FormControl(this.blog.displayName),
-      body: new FormControl(this.blog.body),
-      visibility: new FormControl(this.blog.visibility),
+    this.blogForm = this.formBuilder.group({
+      id: [this.blog.id],
+      displayName: [''],
+      title: ['Taco'],
+      body: ['Lorem Ispum'],
+      createdDate: [new Date()],
+      updatedDate: [new Date()],
+      visibility: [0],
+      categoryId: [0],
+      category: this.formBuilder.group({
+        categoryId: [0],
+        categoryName: [' '],
+        parentCategoryId: [0],
+        PostedBlogs: [],
+        PostedItems: []
+      })
+    });
+  }
 
-      createdDate: new FormControl(this.blog.createdDate),
-      updatedDate: new FormControl(this.blog.updatedDate)
+  loadForm(blogData : Blogs) {
+    this.blogForm.patchValue({
+      title: blogData.title,
+      displayName: blogData.displayName,
+      body: blogData.body,
+      visibility: blogData.visibility,
+      categoryId: blogData.categoryId,
+      createdDate: blogData.createdDate,
+      updatedDate: new Date()
     })
   }
 
   onSaveButton() {
-    const savedBlog: Blogs = { ...this.blog, ...this.blogForm.value };
+    const savedBlog: Blogs = {
+        id: this.blogForm.value.id,
+        displayName: this.blogForm.value.displayName,
+        title: this.blogForm.value.title,
+        body: this.blogForm.value.body,
+        createdDate: this.blogForm.value.createdDate,
+        updatedDate: this.blogForm.value.updatedDate,
+        visibility: this.blogForm.value.visibility,
+        categoryId: this.blogForm.value.categoryId,
+        category: this.blogForm.value.category
+    }
 
     console.log(savedBlog);
     if (this.isEditing) {

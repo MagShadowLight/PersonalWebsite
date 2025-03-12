@@ -12,6 +12,6 @@ export interface PortfolioItems {
   links: string;
   categoryId: number;
   category: Category;
-  imageId: number;
+  imageID: number;
   image: PortfolioItemImages;
 }

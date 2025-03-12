@@ -10,6 +10,6 @@ namespace personal_website.Server.Models
         public string Path { get; set; }
         public long FileSize { get; set; }
 
-        public PortfolioItems Items { get; set; }
+        public PortfolioItems? Items { get; set; }
     }
 }

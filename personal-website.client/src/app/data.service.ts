@@ -47,7 +47,7 @@ export class DataService {
         postedBlog: [],
         postedItem: []
     },
-    imageId: 0,
+    imageID: 0,
     image: {
         id: 0,
         name: '',
@@ -153,6 +153,12 @@ export class DataService {
     this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe(data => {
       this.portfolioItem$.next(data);
     })
+  }
+
+  getItemInfoById(id: number): Observable<PortfolioItems> {
+    return this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).pipe(
+      tap(data => this.portfolioItem$.next(data))
+    )
   }
 
   createItem(item: PortfolioItems): Observable<PortfolioItems> {

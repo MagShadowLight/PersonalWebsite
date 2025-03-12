@@ -3,19 +3,24 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSaveButton()">
   <div>
     <label for="title">Title</label>
-    <input formControlName="title" />
+    <input id="title" type="text" formControlName="title" class="form-control" placeholder="title"/>
   </div>
   <div>
     <label for="displayName">Display Name</label>
-    <input id="displayName" type="displayName" formControlName="displayName" class="form-control" placeholder="Display Name">
+    <input id="displayName" type="text" formControlName="displayName" class="form-control" placeholder="Display Name">
   </div>
   <div>
     <label for="body">Body</label>
-    <input id="body" type="body" formControlName="body" class="form-control" placeholder="Body">
+    <input id="body" type="text" formControlName="body" class="form-control" placeholder="Body">
   </div>
   <div>
     <label for="Visibility">Visibility</label>
-    <input id="visibility" type="visibility" formControlName="visibility" class="form-control" placeholder="Visibility">
+    <input id="visibility" type="text" formControlName="visibility" class="form-control" placeholder="Visibility">
+  </div>
+
+  <div>
+    <label for="CategoryID">CategoryID</label>
+    <input id="categoryID" type="text" formControlName="categoryId" class="form-control" placeholder="CategoryID">
   </div>
 
   <button type="submit">Submit</button>

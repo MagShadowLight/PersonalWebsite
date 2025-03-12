@@ -10,7 +10,7 @@
   <p>{{ (portfolioItem$ | async)!.category.categoryName }}</p>
   <a href="{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
   <button routerLink="../">Back to Portfolio List</button>
-  <button routerLink="/portfolio/edit/1" *ngIf="isAuthenticated()">Edit</button>
+  <button routerLink="/portfolio/edit/{{ (portfolioItem$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
   <button (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
 </div>
 

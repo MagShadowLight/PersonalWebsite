@@ -11,8 +11,6 @@ import { BlogEditComponent } from './Blogs/blog-edit/blog-edit.component';
 import { PortfoliosEditComponent } from './PortfolioItems/portfolios-edit/portfolios-edit.component';
 import { LoginComponent } from './login/login.component';
 import { authGuardGuard } from './Guards/auth-guard.guard';
-//import { BlogCreateComponent } from './Blogs/blog-create/blog-create.component';
-import { PortfolioCreateComponent } from './PortfolioItems/portfolio-create/portfolio-create.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -21,7 +19,7 @@ const routes: Routes = [
   { path: "blog/:id", component: BlogDetailComponent },
   { path: "blog/edit/:id", component: BlogEditComponent, canActivate: [authGuardGuard]},
   { path: "portfolio", component: PortfoliosListComponent },
-  { path: "portfolio/create", component: PortfolioCreateComponent, canActivate: [authGuardGuard] },
+  { path: "portfolio/create", component: PortfoliosEditComponent, canActivate: [authGuardGuard] },
   { path: "portfolio/:id", component: PortfoliosDetailComponent },
   { path: "portfolio/edit/:id", component: PortfoliosEditComponent, canActivate: [authGuardGuard]},
   { path: "login", component: LoginComponent },
