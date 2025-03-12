@@ -1,0 +1,20 @@
+<!--<pre>{{ portfolioItem$ | async | json }}</pre>-->
+
+<div>
+  <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}">
+  <h1>{{(portfolioItem$ | async)!.title }}</h1>
+  <p>{{ (portfolioItem$ | async)!.description }}</p>
+  <p>{{ (portfolioItem$ | async)!.creationDate | date:'mediumDate'}}</p>
+  <p>{{ (portfolioItem$ | async)!.updatedDate | date:'mediumDate' }}</p>
+  <p>{{ (portfolioItem$ | async)!.version }}</p>
+  <p>{{ (portfolioItem$ | async)!.category.categoryName }}</p>
+  <a href="{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
+  <button routerLink="../">Back to Portfolio List</button>
+  <button routerLink="/portfolio/edit/1" *ngIf="isAuthenticated()">Edit</button>
+  <button (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
+</div>
+
+
+
+
+<!--<p>portfolios-detail works!</p>-->

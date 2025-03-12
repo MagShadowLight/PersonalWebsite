@@ -1,0 +1,15 @@
+<!--<pre>
+  {{ blogs$ | async | json}}
+</pre>-->
+
+<div *ngFor="let blogItems of (blogs$ | async)">
+  <h4>{{ blogItems.title }}</h4>
+  <p>{{ blogItems.createdDate | date:'mediumDate' }}</p>
+  <p>{{ blogItems.updatedDate | date:'mediumDate' }}</p>
+  <p>{{ blogItems.category.categoryName  }}</p>
+  <button routerLink="{{ blogItems.id }}">View {{ blogItems.displayName }}</button>
+</div>
+<button (click)="CreateBlog()" *ngIf="isAuthenticated()">Create Blog</button>
+
+
+<!--<p>blog-list works!</p>-->

@@ -1,0 +1,16 @@
+<!--<pre>
+{{ blog$ | async | json }}
+</pre>-->
+
+<div>
+  <h1>{{(blog$ | async)!.title }}</h1>
+  <p>{{ (blog$ | async)!.body }}</p>
+  <p>{{ (blog$ | async)!.createdDate | date:'mediumDate'}}</p>
+  <p>{{ (blog$ | async)!.updatedDate | date:'mediumDate' }}</p>
+  <p>{{ (blog$ | async)!.category.categoryName }}</p>
+  <button routerLink="../">Back to Blog List</button>
+  <button routerLink="/blog/edit/{{ (blog$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
+  <button (click)="DeletePost()" *ngIf="isAuthenticated()">Delete</button>
+</div>
+
+<!--<p>blog-detail works!</p>-->

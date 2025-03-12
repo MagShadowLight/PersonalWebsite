@@ -1,0 +1,23 @@
+<form [formGroup]="blogForm" (ngSubmit)="OnCreate()">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" type="title" class="form-control" formControlName="title" placeholder="title">
+  </div>
+  <div>
+    <label for="displayName">Display Name</label>
+    <input id="displayName" type="displayName" formControlName="displayName" class="form-control" placeholder="Display Name">
+  </div>
+  <div>
+    <label for="body">Body</label>
+    <input id="body" type="body" formControlName="body" class="form-control" placeholder="body">
+  </div>
+  <div>
+    <label for="Visibility">Visibility</label>
+    <input id="Visibility" type="Visibility" formControlName="Visibility" class="form-control" placeholder="Visibility">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+
+<!--<p>blog-create works!</p>-->
