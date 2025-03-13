@@ -84,7 +84,7 @@ namespace personal_website.Server.Controllers
         {
             _context.Blogs.Add(blogs);
             await _context.SaveChangesAsync();
-
+            Console.WriteLine(blogs);
             return CreatedAtAction("GetBlogs", new { id = blogs.Id }, blogs);
         }
 
