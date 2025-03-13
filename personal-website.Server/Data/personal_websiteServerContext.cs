@@ -294,6 +294,9 @@ namespace personal_website.Server.Data
             modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Category).AutoInclude();
             modelBuilder.Entity<Categories>().Navigation(c => c.PostedItems).AutoInclude();
             modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Image).AutoInclude();
+
+            //modelBuilder.Entity<Categories>().Property(b => b.Id)
+            //    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
             
         }
 
