@@ -16,8 +16,6 @@ import { PortfoliosEditComponent } from './PortfolioItems/portfolios-edit/portfo
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-import { BlogCreateComponent } from './Blogs/blog-create/blog-create.component';
-import { PortfolioCreateComponent } from './PortfolioItems/portfolio-create/portfolio-create.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +29,7 @@ import { PortfolioCreateComponent } from './PortfolioItems/portfolio-create/port
     BlogEditComponent,
     PortfoliosEditComponent,
     LoginComponent,
-    FooterComponent,
-    BlogCreateComponent,
-    PortfolioCreateComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -158,7 +158,10 @@ export class PortfoliosEditComponent implements OnInit {
     } else {
       this.data.createItem(savedItem).subscribe(result => {
         this.router.navigate(['/']);
-      })
+      },
+        error => {
+          console.error("Error: Unable to create Items")
+        })
     }
   }
 }
