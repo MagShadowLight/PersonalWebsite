@@ -82,6 +82,18 @@ namespace personal_website.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<PortfolioItems>> PostPortfolioItems(PortfolioItems portfolioItems)
         {
+
+            if (portfolioItems.CategoryId != 0)
+            {
+                // get category from CategoryId
+                var category = _context.Categories.FindAsync(portfolioItems.CategoryId);
+                // put category in items
+                portfolioItems.Category = await category;
+            } else
+            {
+                return BadRequest();
+            }
+
             _context.PortfolioItems.Add(portfolioItems);
             await _context.SaveChangesAsync();
 

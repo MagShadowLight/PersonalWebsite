@@ -184,4 +184,10 @@ export class DataService {
       this.category$.next(data);
     })
   }
+
+  getCategoryInfoById(id: number): Observable<Category> {
+    return this._http.get<Category>(`/api/Categories/${id}`).pipe(
+      tap(data => this.category$.next(data))
+    )
+  }
 }

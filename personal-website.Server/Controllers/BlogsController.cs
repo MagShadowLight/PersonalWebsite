@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using personal_website.Server.Data;
 using personal_website.Server.Models;
 
 namespace personal_website.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
@@ -82,9 +83,21 @@ namespace personal_website.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Blogs>> PostBlogs(Blogs blogs)
         {
+            if (blogs.CategoryId > 0)
+            {
+                // get category
+                var category = _context.Categories.FindAsync(blogs.CategoryId);
+                //Console.WriteLine("Category: {0}", category);
+                // put category in blogs
+                blogs.Category = await category;
+            } else
+            {
+                return BadRequest();
+            }
+
             _context.Blogs.Add(blogs);
             await _context.SaveChangesAsync();
-            Console.WriteLine(blogs);
+            //Console.WriteLine(blogs);
             return CreatedAtAction("GetBlogs", new { id = blogs.Id }, blogs);
         }
 
