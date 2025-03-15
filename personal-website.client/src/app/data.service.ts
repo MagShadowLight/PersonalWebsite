@@ -5,6 +5,7 @@ import { Blogs } from './models/IBlogs';
 import { Category } from './models/ICategory';
 import { PortfolioItems } from './models/IPortfolioItems';
 import { PortfolioItemImages } from './models/IPortfolioItemImages';
+import { Feedback } from './models/IFeedback';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,15 @@ export class DataService {
     fileSize: 0,
     portfolioId: 0
   })
+  feedbacks$: BehaviorSubject<Feedback[]> = new BehaviorSubject<Feedback[]>([]);
+  feedback$: BehaviorSubject<Feedback> = new BehaviorSubject<Feedback>({
+    FeedbackId: 0,
+    FeedbackName: '',
+    email: '',
+    comment: '',
+    responseRequired: false,
+    isResolved: false
+  })
 
   constructor(private _http: HttpClient) {
     //this.blog = [
@@ -116,19 +126,19 @@ export class DataService {
   getAllBlogs(): void {
     this._http.get<Blogs[]>('/api/blogs').subscribe(data => {
       this.blogs$.next(data);
-    })
+    });
   }
 
   getBlogsbyId(id: number) {
     this._http.get<Blogs>(`/api/blogs/${id}`).subscribe(data => {
       this.blog$.next(data);
-    })
+    });
   }
 
   getBlogInfoById(id: number): Observable<Blogs> {
     return this._http.get<Blogs>(`/api/blogs/${id}`).pipe(
       tap(data => this.blog$.next(data))
-    )
+    );
   }
 
   createBlog(blog: Blogs): Observable<Blogs> {
@@ -136,7 +146,7 @@ export class DataService {
   }
 
   updateBlog(id: number, blog: Blogs): Observable<Blogs> {
-    return this._http.put<Blogs>('/api/blogs/' + id, blog);
+    return this._http.put<Blogs>(`/api/blogs/${id}`, blog);
   }
 
   deleteBlog(id: number): Observable<any> {
@@ -146,19 +156,19 @@ export class DataService {
   getAllPortfolioItems(): void {
     this._http.get<PortfolioItems[]>('/api/PortfolioItems').subscribe(data => {
       this.portfolioItems$.next(data);
-    })
+    });
   }
 
   getPortfolioItemById(id: number) {
     this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe(data => {
       this.portfolioItem$.next(data);
-    })
+    });
   }
 
   getItemInfoById(id: number): Observable<PortfolioItems> {
     return this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).pipe(
       tap(data => this.portfolioItem$.next(data))
-    )
+    );
   }
 
   createItem(item: PortfolioItems): Observable<PortfolioItems> {
@@ -166,7 +176,7 @@ export class DataService {
   }
 
   updateItem(id: number, item: PortfolioItems): Observable<PortfolioItems> {
-    return this._http.put<PortfolioItems>('/api/PortfolioItems/' + id, item);
+    return this._http.put<PortfolioItems>(`/api/PortfolioItems/${id}`, item);
   }
 
   deleteItem(id: number): Observable<any> {
@@ -183,5 +193,53 @@ export class DataService {
     this._http.get<Category>(`/api/Categories/${id}`).subscribe(data => {
       this.category$.next(data);
     })
+  }
+
+  getCategoryInfoById(id: number): Observable<Category> {
+    return this._http.get<Category>(`/api/Categories/${id}`).pipe(
+      tap(data => this.category$.next(data))
+    );
+  }
+
+  CreateCategory(category: Category): Observable<Category> {
+    return this._http.post<Category>('/api/Categories/', category);
+  }
+
+  UpdateCategory(id: number, category: Category): Observable<Category> {
+    return this._http.put<Category>(`/api/Categories/${id}`, category);
+  }
+
+  DeleteCategory(id: number): Observable<any> {
+    return this._http.delete<any>(`/api/Categories/${id}`);
+  }
+
+  GetAllFeedback(): void {
+    this._http.get<Feedback[]>('/api/Feedbacks').subscribe(data => {
+      this.feedbacks$.next(data);
+    });
+  }
+
+  GetFeedbackById(id: number): void {
+    this._http.get<Feedback>(`/api/Feedbacks/${id}`).subscribe(data => {
+      this.feedback$.next(data);
+    });
+  }
+
+  GetFeedbackInfoById(id: number): Observable<Feedback> {
+    return this._http.get<Feedback>(`/api/Feedbacks/${id}`).pipe(
+      tap(data => this.feedback$.next(data))
+    );
+  }
+
+  CreateFeedback(feedback: Feedback): Observable<Feedback> {
+    return this._http.post<Feedback>('/api/Feedbacks', feedback);
+  }
+
+  UpdateFeedback(id: number, feedback: Feedback) {
+    return this._http.put<Feedback>(`/api/Feedbacks/${id}`, feedback);
+  }
+
+  DeleteFeedback(id: number) : Observable<any> {
+    return this._http.delete<any>(`/api/Feedbacks/${id}`);
   }
 }

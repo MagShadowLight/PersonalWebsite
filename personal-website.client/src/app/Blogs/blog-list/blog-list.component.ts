@@ -31,7 +31,6 @@ export class BlogListComponent implements OnInit {
 
   blogs$: BehaviorSubject<Blogs[]>;
   categories$: BehaviorSubject<Category[]>;
-  Id: Number = 0;
   
 
   constructor(private data: DataService, private router: Router, private auth: AuthService) {

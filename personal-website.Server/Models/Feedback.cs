@@ -7,5 +7,6 @@
         public string Email { get; set; }
         public string FeedbackComment { get; set; }
         public bool NeededResponse { get; set; }
+        public bool IsResolved { get; set; }
     }
 }
