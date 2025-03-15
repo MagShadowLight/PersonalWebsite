@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, switchMap } from 'rxjs';
 import { DataService } from '../../data.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Category } from '../../models/ICategory';
 
 @Component({
   selector: 'app-blog-edit',
@@ -13,7 +14,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class BlogEditComponent implements OnInit, OnDestroy {
   blog: Blogs = {
-      id: -1,
+      id: 0,
       displayName: '',
       title: '',
       body: 'Lorem Ispum',
@@ -29,6 +30,13 @@ export class BlogEditComponent implements OnInit, OnDestroy {
           postedItem: []
       }
   }
+  //category: Category = {
+  //    categoryId: 0,
+  //    categoryName: '',
+  //    parentCategoryId: null,
+  //    postedBlog: [],
+  //    postedItem: []
+  //}
   isEditing: boolean = false;
 
   blogForm: FormGroup = new FormGroup({});
@@ -41,9 +49,9 @@ export class BlogEditComponent implements OnInit, OnDestroy {
     });
 
   }
-    ngOnDestroy(): void {
+  ngOnDestroy(): void {
        
-    }
+  }
 
   ngOnInit(): void {
 
@@ -125,9 +133,10 @@ export class BlogEditComponent implements OnInit, OnDestroy {
         createdDate: this.blogForm.value.createdDate,
         updatedDate: this.blogForm.value.updatedDate,
         visibility: this.blogForm.value.visibility,
-        categoryId: this.blogForm.value.categoryId,
+        categoryId: Number(this.blogForm.value.categoryId),
         category: this.blogForm.value.category
     }
+
 
     console.log(savedBlog);
     if (this.isEditing) {
@@ -135,9 +144,26 @@ export class BlogEditComponent implements OnInit, OnDestroy {
         this.router.navigate(['/']);
       });
     } else {
+      //if (savedBlog.categoryId > 0) {
+      //  // get CategoryId from blog
+      //  const id = savedBlog.categoryId
+      //  console.log(id)
+      //  // get Category from CategoryId
+      //  this.data.getCategoryInfoById(id).subscribe((category : Category) => {
+      //    this.category = category;
+      //    console.log(this.category);
+      //  })
+      //  console.log(this.category);
+      //  // place Category in Blogs
+      //  savedBlog.category = this.category;
+      this.blog = savedBlog
       this.data.createBlog(savedBlog).subscribe(result => {
-        this.router.navigate(['/']);
-      });
+        //console.log('Data should go through with category')
+        this.router.navigate(['/blog']);
+      },
+        error => {
+          console.error("Error: Unable to create Blogs")
+        });
     }
   }
 
