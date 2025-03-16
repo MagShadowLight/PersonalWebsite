@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DataService } from '../../data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortfolioItems } from '../../models/IPortfolioItems';
 import { AuthService } from '../../Services/auth.service';
+import { ItemDataService } from '../../Services/dataservices/item-data.service';
 
 @Component({
   selector: 'app-portfolios-detail',
@@ -15,14 +15,14 @@ export class PortfoliosDetailComponent implements OnInit{
   id: number = 0;
   portfolioItem$: BehaviorSubject<PortfolioItems>;
 
-  constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
-    this.portfolioItem$ = this.data.portfolioItem$;
+  constructor(private data1: ItemDataService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
+    this.portfolioItem$ = this.data1.portfolioItem$;
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!;
-      this.data.getPortfolioItemById(this.id);
+      this.data1.getPortfolioItemById(this.id);
     });
   }
 
@@ -31,7 +31,7 @@ export class PortfoliosDetailComponent implements OnInit{
     console.log(item.value, this.id)
 
     if (item != undefined) {
-      this.data.deleteItem(this.id).subscribe(result => {
+      this.data1.deleteItem(this.id).subscribe(result => {
         this.router.navigate(['/portfolio']);
       });
     }

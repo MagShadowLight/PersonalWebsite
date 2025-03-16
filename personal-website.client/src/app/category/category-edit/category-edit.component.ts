@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../../models/ICategory';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { DataService } from '../../data.service';
+import { CategoryDataService } from '../../Services/dataservices/category-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-edit',
@@ -19,13 +20,15 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
       postedItem: []
   }
 
+  subscription: Subscription;
   isEditing: boolean = false;
   categoryForm: FormGroup = new FormGroup({});
 
-  constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.router.events.subscribe(event => {
+  constructor(private data: CategoryDataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+    this.subscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getCategoryData();
+        console.log("This should create event when on edit")
       }
     })
   }
@@ -39,6 +42,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
   getCategoryData() {
     this.route.paramMap.subscribe(getId => {
+      
       this.category.id = +getId.get('id')!;
     });
 
@@ -99,6 +103,8 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('This should destroy the event when leaving edit')
+    this.subscription.unsubscribe();
     //throw new Error('Method not implemented.');
   }
 

@@ -1,7 +1,6 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarsComponent } from './nav-bars/nav-bars.component';
@@ -10,7 +9,6 @@ import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
 import { PortfoliosListComponent } from './PortfolioItems/portfolios-list/portfolios-list.component';
 import { PortfoliosDetailComponent } from './PortfolioItems/portfolios-detail/portfolios-detail.component';
 import { HomeComponent } from './home/home.component';
-import { DataService } from './data.service';
 import { BlogEditComponent } from './blogs/blog-edit/blog-edit.component';
 import { PortfoliosEditComponent } from './PortfolioItems/portfolios-edit/portfolios-edit.component';
 import { LoginComponent } from './login/login.component';
@@ -23,6 +21,11 @@ import { FeedbackDetailComponent } from './Feedback/feedback-detail/feedback-det
 import { FeedbackEditComponent } from './Feedback/feedback-edit/feedback-edit.component';
 import { FeedbackFormComponent } from './Feedback/feedback-form/feedback-form.component';
 import { FeedbackListComponent } from './Feedback/feedback-list/feedback-list.component';
+import { BlogDataService } from './Services/dataservices/blog-data.service';
+import { ItemDataService } from './Services/dataservices/item-data.service';
+import { CategoryDataService } from './Services/dataservices/category-data.service';
+import { FeedbackDataService } from './Services/dataservices/feedback-data.service';
+import { ItemImageDataService } from './Services/dataservices/item-image-data.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,11 @@ import { FeedbackListComponent } from './Feedback/feedback-list/feedback-list.co
     ReactiveFormsModule
   ],
   providers: [
-    DataService,
+    BlogDataService,
+    ItemDataService,
+    CategoryDataService,
+    FeedbackDataService,
+    ItemImageDataService,
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

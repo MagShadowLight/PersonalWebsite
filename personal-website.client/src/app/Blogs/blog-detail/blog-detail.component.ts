@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Blogs } from '../../models/IBlogs';
 import { AuthService } from '../../Services/auth.service';
+import { BlogDataService } from '../../Services/dataservices/blog-data.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -15,7 +15,7 @@ export class BlogDetailComponent implements OnInit{
 
   id: number = 0;
   blog$: BehaviorSubject<Blogs>;
-  constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService ) {
+  constructor(private data: BlogDataService, private route: ActivatedRoute, private router: Router, private auth: AuthService ) {
     //  this.id = 0;
     //this.blog = {
     //  Id: 0,
