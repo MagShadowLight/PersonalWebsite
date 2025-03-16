@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
 import { BehaviorSubject } from 'rxjs';
 import { Blogs } from '../../models/IBlogs';
 import { Category } from '../../models/ICategory';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
-import { BlogDataService } from '../../Services/dataservices/blog-data.service';
-import { CategoryDataService } from '../../Services/dataservices/category-data.service';
 
 //interface BlogList extends Blogs {
 //  Id: number;
@@ -34,9 +33,9 @@ export class BlogListComponent implements OnInit {
   categories$: BehaviorSubject<Category[]>;
   
 
-  constructor(private data1: BlogDataService, private router: Router, private auth: AuthService, private data2: CategoryDataService) {
-    this.blogs$ = this.data1.blogs$;
-    this.categories$ = this.data2.categories$
+  constructor(private data: DataService, private router: Router, private auth: AuthService) {
+    this.blogs$ = this.data.blogs$;
+    this.categories$ = this.data.categories$
 
     //this.data.getAllBlogs().subscribe(data => {
     //  this.blogs = data;
@@ -46,8 +45,8 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data1.getAllBlogs();
-    this.data2.getAllCategories();
+    this.data.getAllBlogs();
+    this.data.getAllCategories();
   }
 
   isAuthenticated(): boolean {

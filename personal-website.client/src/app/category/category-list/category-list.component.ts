@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from '../../models/ICategory';
+import { DataService } from '../../data.service';
 import { Router } from '@angular/router';
-import { CategoryDataService } from '../../Services/dataservices/category-data.service';
 
 @Component({
   selector: 'app-category-list',
@@ -14,7 +14,7 @@ export class CategoryListComponent implements OnInit {
 
   categories: BehaviorSubject<Category[]>;
 
-  constructor(private data: CategoryDataService, private router: Router) {
+  constructor(private data: DataService, private router: Router) {
     this.categories = this.data.categories$
   }
 

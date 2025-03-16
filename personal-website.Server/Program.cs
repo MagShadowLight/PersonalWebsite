@@ -10,15 +10,13 @@ namespace personal_website.Server
 {
     public class Program
     {
-        public static async void Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<personal_websiteServerContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("personal_websiteServerContext") ?? throw new InvalidOperationException("Connection string 'personal_websiteServerContext' not found.")));
 
             builder.Services.AddDefaultIdentity<PersonalUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<personal_websiteServerContext>();
-
-            
 
             // Add services to the container.
 
@@ -39,22 +37,6 @@ namespace personal_website.Server
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
-            // Seed User and Role
-            using (var scope = app.Services.CreateScope())
-            {
-                var service = scope.ServiceProvider;
-                try
-                {
-                    var userManager = service.GetRequiredService<UserManager<PersonalUser>>();
-                    await PersonalWebsiteSeedDataContext.SeedUserAndRoleAsync(userManager);
-                }
-                catch (Exception ex)
-                {
-                    var logger = service.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured while seeding user data");
-                }
-            }
 
             //app.UseDefaultFiles();
             //app.UseStaticFiles();

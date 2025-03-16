@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Blogs } from '../../models/IBlogs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
+import { DataService } from '../../data.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Category } from '../../models/ICategory';
-import { BlogDataService } from '../../Services/dataservices/blog-data.service';
 
 @Component({
   selector: 'app-blog-edit',
@@ -38,12 +38,11 @@ export class BlogEditComponent implements OnInit, OnDestroy {
   //    postedItem: []
   //}
   isEditing: boolean = false;
-  subscription: Subscription
 
   blogForm: FormGroup = new FormGroup({});
-  constructor(private data: BlogDataService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {
     //this.initFormAsEmpty();
-    this.subscription = this.router.events.subscribe(event => {
+    this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getBlogData();
       }
@@ -51,7 +50,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+       
   }
 
   ngOnInit(): void {

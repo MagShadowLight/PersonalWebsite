@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Feedback } from '../../models/IFeedback';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { FeedbackDataService } from '../../Services/dataservices/feedback-data.service';
-import { Subscription } from 'rxjs';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-feedback-edit',
@@ -22,10 +21,9 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
   }
 
   feedbackForm: FormGroup = new FormGroup({});
-  subscription: Subscription
 
-  constructor(private data: FeedbackDataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.subscription = this.router.events.subscribe(event => {
+  constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+    this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getFeedbackData();
       }
@@ -87,7 +85,6 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
     //throw new Error('Method not implemented.');
   }
 

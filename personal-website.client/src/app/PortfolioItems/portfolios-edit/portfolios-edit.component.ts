@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { PortfolioItems } from '../../models/IPortfolioItems';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { DataService } from '../../data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ItemDataService } from '../../Services/dataservices/item-data.service';
 
 @Component({
   selector: 'app-portfolios-edit',
@@ -11,7 +11,7 @@ import { ItemDataService } from '../../Services/dataservices/item-data.service';
   templateUrl: './portfolios-edit.component.html',
   styleUrl: './portfolios-edit.component.css'
 })
-export class PortfoliosEditComponent implements OnInit, OnDestroy {
+export class PortfoliosEditComponent implements OnInit {
   item: PortfolioItems = {
       id: 0,
       displayName: '',
@@ -42,19 +42,17 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
   isEditing: Boolean = false;
 
   itemForm: FormGroup = new FormGroup({});
-  subscription: Subscription
   //id: number = 0;
   //item$: BehaviorSubject<PortfolioItems>
 
-  constructor(private data1: ItemDataService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
     //this.item$ = this.data.portfolioItem$
-    this.subscription = this.router.events.subscribe(event => {
+    this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getItemData();
       }
     });
   }
-
   getItemData() {
     this.route.paramMap.subscribe(getId => {
       this.item.id = +getId.get('id')!;
@@ -68,7 +66,7 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
     }
 
     if (this.isEditing && this.item.id != null && this.item.id != 0) {
-      this.data1.getItemInfoById(this.item.id).subscribe((items: PortfolioItems) => {
+      this.data.getItemInfoById(this.item.id).subscribe((items: PortfolioItems) => {
         this.item = items;
 
         console.log(
@@ -154,20 +152,16 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
 
     console.log(savedItem);
     if (this.isEditing) {
-      this.data1.updateItem(this.item.id, savedItem).subscribe(result => {
+      this.data.updateItem(this.item.id, savedItem).subscribe(result => {
         this.router.navigate(['/']);
       });
     } else {
-      this.data1.createItem(savedItem).subscribe(result => {
+      this.data.createItem(savedItem).subscribe(result => {
         this.router.navigate(['/']);
       },
         error => {
           console.error("Error: Unable to create Items")
         })
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

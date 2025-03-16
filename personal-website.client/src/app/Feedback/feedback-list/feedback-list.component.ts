@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Feedback } from '../../models/IFeedback';
 import { Router } from '@angular/router';
-import { FeedbackDataService } from '../../Services/dataservices/feedback-data.service';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-feedback-list',
@@ -13,7 +13,7 @@ import { FeedbackDataService } from '../../Services/dataservices/feedback-data.s
 export class FeedbackListComponent implements OnInit {
   feedback: BehaviorSubject<Feedback[]>
 
-  constructor(private data: FeedbackDataService, private router: Router) {
+  constructor(private data: DataService, private router: Router) {
     this.feedback = this.data.feedbacks$;
   }
 

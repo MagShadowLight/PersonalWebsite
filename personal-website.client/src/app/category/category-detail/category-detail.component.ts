@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/ICategory';
 import { BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryDataService } from '../../Services/dataservices/category-data.service';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-category-detail',
@@ -14,7 +14,7 @@ export class CategoryDetailComponent implements OnInit{
   id: number = 0;
   category: BehaviorSubject<Category>;
 
-  constructor(private data: CategoryDataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private data: DataService, private route: ActivatedRoute, private router: Router) {
     this.category = this.data.category$;
   }
 

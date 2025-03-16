@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Feedback } from '../../models/IFeedback';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '../../data.service';
 import { delay } from 'rxjs';
-import { FeedbackDataService } from '../../Services/dataservices/feedback-data.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -26,7 +26,7 @@ export class FeedbackFormComponent implements OnInit {
   isCreated: Boolean = false;
   
 
-  constructor(private data: FeedbackDataService, private router: Router, private fb: FormBuilder) { }
+  constructor(private data: DataService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
