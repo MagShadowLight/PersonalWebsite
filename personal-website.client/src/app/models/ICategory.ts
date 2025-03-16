@@ -2,7 +2,7 @@ import { Blogs } from "./IBlogs";
 import { PortfolioItems } from "./IPortfolioItems";
 
 export interface Category {
-  categoryId: number;
+  id: number;
   categoryName: string;
   parentCategoryId: number | null;
   postedBlog: Blogs[];

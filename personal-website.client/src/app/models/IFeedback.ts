@@ -1,13 +1,13 @@
 export interface Feedback {
-  FeedbackId: number;
+  id: number;
 
-  FeedbackName: string;
+  feedbackName: string;
 
   email: string;
 
-  comment: string;
+  feedbackComment: string;
 
-  responseRequired: boolean;
+  neededResponse: boolean;
 
   isResolved: boolean;
 }

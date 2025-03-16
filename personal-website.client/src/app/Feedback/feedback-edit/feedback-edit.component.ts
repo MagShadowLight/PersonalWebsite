@@ -12,11 +12,11 @@ import { DataService } from '../../data.service';
 })
 export class FeedbackEditComponent implements OnInit, OnDestroy {
   feedback: Feedback = {
-      FeedbackId: 0,
-      FeedbackName: '',
+      id: 0,
+      feedbackName: '',
       email: '',
-      comment: '',
-      responseRequired: false,
+      feedbackComment: '',
+      neededResponse: false,
       isResolved: false
   }
 
@@ -36,10 +36,10 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
 
   getFeedbackData() {
     this.route.paramMap.subscribe(getId => {
-      this.feedback.FeedbackId = +getId.get('id')!;
+      this.feedback.id = +getId.get('id')!;
     });
 
-    this.data.GetFeedbackInfoById(this.feedback.FeedbackId).subscribe((feedback: Feedback) => {
+    this.data.GetFeedbackInfoById(this.feedback.id).subscribe((feedback: Feedback) => {
       this.feedback = feedback;
 
       this.loadForm(this.feedback);
@@ -61,25 +61,25 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
 
   loadForm(feedback: Feedback) {
     this.feedbackForm.patchValue({
-      feedbackName: feedback.FeedbackName,
+      feedbackName: feedback.feedbackName,
       email: feedback.email,
-      comment: feedback.comment,
-      responseRequired: feedback.responseRequired,
+      comment: feedback.feedbackComment,
+      responseRequired: feedback.neededResponse,
       isResolved: feedback.isResolved
     })
   }
 
   onSave() {
     const savedFeedback: Feedback = {
-      FeedbackId: this.feedback.FeedbackId,
-      FeedbackName: this.feedbackForm.value.feedbackName,
+      id: this.feedback.id,
+      feedbackName: this.feedbackForm.value.feedbackName,
       email: this.feedbackForm.value.email,
-      comment: this.feedbackForm.value.comment,
-      responseRequired: this.feedbackForm.value.responseRequired,
+      feedbackComment: this.feedbackForm.value.comment,
+      neededResponse: this.feedbackForm.value.responseRequired,
       isResolved: this.feedbackForm.value.isResolved
     };
 
-    this.data.UpdateFeedback(this.feedback.FeedbackId, savedFeedback).subscribe(result => {
+    this.data.UpdateFeedback(this.feedback.id, savedFeedback).subscribe(result => {
       this.router.navigate(['feedback']);
     });
   }

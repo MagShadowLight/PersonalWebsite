@@ -23,7 +23,7 @@ export class DataService {
     visibility: 0,
     categoryId: 0,
     category: {
-        categoryId: 0,
+        id: 0,
         categoryName: '',
         parentCategoryId: null,
         postedBlog: [],
@@ -42,7 +42,7 @@ export class DataService {
     links: '',
     categoryId: 0,
     category: {
-        categoryId: 0,
+        id: 0,
         categoryName: '',
         parentCategoryId: null,
         postedBlog: [],
@@ -60,7 +60,7 @@ export class DataService {
   })
   categories$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
   category$: BehaviorSubject<Category> = new BehaviorSubject<Category>({
-    categoryId: 0,
+    id: 0,
     categoryName: '',
     parentCategoryId: null,
     postedBlog: [],
@@ -78,11 +78,11 @@ export class DataService {
   })
   feedbacks$: BehaviorSubject<Feedback[]> = new BehaviorSubject<Feedback[]>([]);
   feedback$: BehaviorSubject<Feedback> = new BehaviorSubject<Feedback>({
-    FeedbackId: 0,
-    FeedbackName: '',
+    id: 0,
+    feedbackName: '',
     email: '',
-    comment: '',
-    responseRequired: false,
+    feedbackComment: '',
+    neededResponse: false,
     isResolved: false
   })
 

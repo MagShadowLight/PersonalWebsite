@@ -18,6 +18,12 @@
             <a class="nav-link" routerLink="portfolio">Portfolio</a>
           </li>
           <li class="nav-item" *ngIf="isAuthenticated()">
+            <a class="nav-link" routerLink="category">Category</a>
+          </li>
+          <li class="nav-item" *ngIf="isAuthenticated()">
+            <a class="nav-link" routerLink="feedback">Feedback</a>
+          </li>
+          <li class="nav-item" *ngIf="isAuthenticated()">
             <a class="nav-link" href="" (click)="logout()">Log Out</a>
           </li>
         </ul>

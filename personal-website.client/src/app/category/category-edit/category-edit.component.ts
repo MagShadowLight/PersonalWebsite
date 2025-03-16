@@ -12,7 +12,7 @@ import { DataService } from '../../data.service';
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
   category: Category = {
-      categoryId: 0,
+      id: 0,
       categoryName: '',
       parentCategoryId: null,
       postedBlog: [],
@@ -39,17 +39,17 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
   getCategoryData() {
     this.route.paramMap.subscribe(getId => {
-      this.category.categoryId = +getId.get('id')!;
+      this.category.id = +getId.get('id')!;
     });
 
-    if (this.category.categoryId <= 0) {
+    if (this.category.id <= 0) {
       this.isEditing = false;
     } else {
       this.isEditing = true;
     }
 
-    if (this.isEditing && this.category.categoryId != null && this.category.categoryId != 0) {
-      this.data.getCategoryInfoById(this.category.categoryId).subscribe((category: Category) => {
+    if (this.isEditing && this.category.id != null && this.category.id != 0) {
+      this.data.getCategoryInfoById(this.category.id).subscribe((category: Category) => {
         this.category = category;
 
         this.loadForm(this.category);
@@ -80,7 +80,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
   onSave() {
     const savedCategory: Category = {
-      categoryId: this.category.categoryId,
+      id: this.category.id,
       categoryName: this.categoryForm.value.categoryName,
       parentCategoryId: this.categoryForm.value.parentCategoryId,
       postedBlog: this.categoryForm.value.postedBlog,
@@ -88,7 +88,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
     }
 
     if (this.isEditing) {
-      this.data.UpdateCategory(this.category.categoryId, savedCategory).subscribe(result => {
+      this.data.UpdateCategory(this.category.id, savedCategory).subscribe(result => {
         this.router.navigate(['category'])
       });
     } else {

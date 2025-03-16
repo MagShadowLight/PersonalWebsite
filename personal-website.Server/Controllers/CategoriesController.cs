@@ -11,7 +11,7 @@ using personal_website.Server.Models;
 
 namespace personal_website.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase

@@ -30,15 +30,14 @@ const routes: Routes = [
   { path: "portfolio/:id", component: PortfoliosDetailComponent },
   { path: "portfolio/edit/:id", component: PortfoliosEditComponent, canActivate: [authGuardGuard]},
   { path: "login", component: LoginComponent },
-  { path: "category", component: CategoryListComponent },
-  { path: "category/create", component: CategoryEditComponent },
-  { path: "category/:id", component: CategoryDetailComponent },
-  { path: "category/edit/:id", component: CategoryEditComponent },
-  { path: "feedback", component: FeedbackListComponent },
-  { path: "feedback/create", component: FeedbackEditComponent },
-  { path: "feedback/:id", component: FeedbackDetailComponent },
-  { path: "feedback/edit/:id", component: FeedbackEditComponent },
-  { path: "feedbackform", component: FeedbackFormComponent }
+  { path: "category", component: CategoryListComponent, canActivate: [authGuardGuard]},
+  { path: "category/create", component: CategoryEditComponent, canActivate: [authGuardGuard] },
+  { path: "category/:id", component: CategoryDetailComponent, canActivate: [authGuardGuard] },
+  { path: "category/edit/:id", component: CategoryEditComponent, canActivate: [authGuardGuard] },
+  { path: "feedback", component: FeedbackListComponent, canActivate: [authGuardGuard] },
+  { path: "feedback/create", component: FeedbackEditComponent, canActivate: [authGuardGuard] },
+  { path: "feedback/:id", component: FeedbackDetailComponent, canActivate: [authGuardGuard] },
+  { path: "feedback/edit/:id", component: FeedbackEditComponent, canActivate: [authGuardGuard] }
 ];
 
 @NgModule({

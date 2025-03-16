@@ -1,5 +1,11 @@
-<pre>{{ category | async | json }}</pre>
+<!--<pre>{{ category | async | json }}</pre>-->
 
 <!--TODO: Create Element to display the data-->
+<div>
+  <h1>{{ (category | async)!.categoryName }}</h1>
+  <button routerLink="../">Back to category list</button>
+  <button routerLink="/category/edit/{{ (category | async)!.id }}">Edit</button>
+  <button (click)="DeleteCategory()">Delete</button>
+</div>
 
-<p>category-detail works!</p>
+<!--<p>category-detail works!</p>-->

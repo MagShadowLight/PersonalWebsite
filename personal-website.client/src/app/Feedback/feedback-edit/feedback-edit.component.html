@@ -1,5 +1,28 @@
-<pre>{{ feedback | json }}</pre>
+<!--<pre>{{ feedback | json }}</pre>-->
 
 <!--TODO: Create Form to update Feedback-->
+<form [formGroup]="feedbackForm" (ngSubmit)="onSave()">
+  <div>
+    <label for="feedbackName">Feedback Title</label>
+    <input id="feedbackName" type="text" formControlName="feedbackName" class="form-control" placeholder="Feedback Title"/>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="text" formControlName="email" class="form-control" placeholder="Email" />
+  </div>
+  <div>
+    <label for="comment">Comment</label>
+    <input id="comment" type="text" formControlName="comment" class="form-control" placeholder="Comment"/>
+  </div>
+  <div>
+    <label for="responseRequired">Need Response?</label>
+    <input id="responseRequired" type="checkbox" formControlName="responseRequired"/>
+  </div>
+  <div>
+    <label for="isResolved">Resolved?</label>
+    <input id="isResolved" type="checkbox" formControlName="isResolved"/>
+  </div>
+  <button type="submit">Submit</button>
+</form>
 
-<p>feedback-edit works!</p>
+<!--<p>feedback-edit works!</p>-->

@@ -1,5 +1,23 @@
-<pre>{{ feedback | async | json }}</pre>
+<!--<pre>{{ feedback | async | json }}</pre>-->
 
 <!--TODO: Create element to display feedback detail-->
+<div>
+  <h1>{{ (feedback | async)!.feedbackName }}</h1>
+  <p>{{ (feedback | async)!.email }}</p>
+  <p>{{ (feedback | async)!.feedbackComment }}</p>
+  <div>
+    <label>Need Response?</label>
+    <p *ngIf="((feedback | async)!.neededResponse)">Yes</p>
+    <p *ngIf="(!(feedback | async)!.neededResponse)">No</p>
+  </div>
+  <div>
+    <label>Resolved?</label>
+    <p *ngIf="((feedback | async)!.isResolved)">Yes</p>
+    <p *ngIf="!((feedback | async)!.isResolved)">No</p>
+  </div>
+  <button routerLink="../">Back to feedback list</button>
+  <button routerLink="/feedback/edit/{{ (feedback | async)!.id }}">Edit</button>
+  <button (click)="DeleteFeedback()">Delete</button>
+</div>
 
-<p>feedback-detail works!</p>
+<!--<p>feedback-detail works!</p>-->

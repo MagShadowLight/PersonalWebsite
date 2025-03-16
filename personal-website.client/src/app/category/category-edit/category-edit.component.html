@@ -1,5 +1,17 @@
-<pre>{{ category | json }}</pre>
+<!--<pre>{{ category | json }}</pre>-->
 
 <!--TODO: Create Form to create and edit category-->
+<form [formGroup]="categoryForm" (ngSubmit)="onSave()">
+  <div>
+    <label for="categoryName">Category Name</label>
+    <input id="categoryName" type="text" formControlName="categoryName" class="form-control" placeholder="Category Name"/>
+  </div>
+  <div>
+    <label for="parentCategoryId">Parent Category Number</label>
+    <input id="parentCategoryId" type="text" formControlName="parentCategoryId" class="form-control" placeholder="Parent Category Number"/>
+  </div>
+  <button type="submit">Submit</button>
+</form>
 
-<p>category-edit works!</p>
+
+<!--<p>category-edit works!</p>-->

@@ -1,5 +1,22 @@
-<pre>{{ feedback | async | json }}</pre>
+<!--<pre>{{ feedback | async | json }}</pre>-->
 
 <!--TODO: Create element to display feedbacks-->
+<div *ngFor="let feedbackItem of (feedback | async)">
+  <h1>{{ feedbackItem.feedbackName }}</h1>
+  <p>{{ feedbackItem.email }}</p>
+  <p>{{ feedbackItem.feedbackComment }}</p>
+  <!--<div>
+    <label>Need Response?</label>
+    <p *ngIf="(feedbackItem!.neededResponse)">Yes</p>
+    <p *ngIf="!(feedbackItem!.neededResponse)">No</p>
+  </div>-->
+  <!--<div>
+    <label>Resolved?</label>
+    <p *ngIf="(feedbackItem!.isResolved)">Yes</p>
+    <p *ngIf="!(feedbackItem!.isResolved)">No</p>
+  </div>-->
+  <button routerLink="{{ feedbackItem.id }}">View this feedback</button>
+</div>
 
-<p>feedback-list works!</p>
+
+<!--<p>feedback-list works!</p>-->

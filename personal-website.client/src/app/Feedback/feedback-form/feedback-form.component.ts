@@ -3,6 +3,7 @@ import { Feedback } from '../../models/IFeedback';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../data.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-feedback-form',
@@ -12,15 +13,18 @@ import { DataService } from '../../data.service';
 })
 export class FeedbackFormComponent implements OnInit {
   feedback: Feedback = {
-    FeedbackId: 0,
-    FeedbackName: '',
+    id: 0,
+    feedbackName: '',
     email: '',
-    comment: '',
-    responseRequired: false,
+    feedbackComment: '',
+    neededResponse: false,
     isResolved: false
   };
 
   feedbackForm: FormGroup = new FormGroup({});
+
+  isCreated: Boolean = false;
+  
 
   constructor(private data: DataService, private router: Router, private fb: FormBuilder) { }
 
@@ -41,17 +45,20 @@ export class FeedbackFormComponent implements OnInit {
 
   onSave() {
     const savedFeedback: Feedback = {
-      FeedbackId: this.feedbackForm.value.feedbackId,
-      FeedbackName: this.feedbackForm.value.feedbackName,
+      id: this.feedbackForm.value.feedbackId,
+      feedbackName: this.feedbackForm.value.feedbackName,
       email: this.feedbackForm.value.email,
-      comment: this.feedbackForm.value.comment,
-      responseRequired: this.feedbackForm.value.responseRequired,
+      feedbackComment: this.feedbackForm.value.comment,
+      neededResponse: this.feedbackForm.value.responseRequired,
       isResolved: this.feedbackForm.value.isResolved
     };
-
-    this.data.CreateFeedback(savedFeedback).subscribe(result => {
-      this.router.navigate(['/']);
+    this.isCreated = true;
+    this.data.CreateFeedback(savedFeedback).pipe(
+      delay(3000)
+    ).subscribe(result => {
+      this.isCreated = false;
     });
+    
   }
 
 }

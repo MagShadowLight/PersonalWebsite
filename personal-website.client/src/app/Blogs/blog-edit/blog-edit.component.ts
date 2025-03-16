@@ -23,7 +23,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
       visibility: 0,
       categoryId: 0,
       category: {
-          categoryId: 0,
+          id: 0,
           categoryName: ' ',
           parentCategoryId: 0,
           postedBlog: [],

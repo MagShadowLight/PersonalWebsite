@@ -20,6 +20,10 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.getAllCategories();
+    console.log(this.categories);
   }
-  
+
+  CreateCategory(): void {
+    this.router.navigate(['category', 'create'])
+  }
 }

@@ -23,7 +23,7 @@ export class PortfoliosEditComponent implements OnInit {
       links: '',
       categoryId: 0,
       category: {
-          categoryId: 0,
+          id: 0,
           categoryName: '',
           parentCategoryId: 0,
           postedBlog: [],
