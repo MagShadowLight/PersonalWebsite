@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using personal_website.Server.Data;
 
@@ -11,9 +12,11 @@ using personal_website.Server.Data;
 namespace personal_website.Server.Migrations
 {
     [DbContext(typeof(personal_websiteServerContext))]
-    partial class personal_websiteServerContextModelSnapshot : ModelSnapshot
+    [Migration("20250315045602_AddedIsResolvedColumn")]
+    partial class AddedIsResolvedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,7 +281,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Blogs", (string)null);
+                    b.ToTable("Blogs");
 
                     b.HasData(
                         new
@@ -322,7 +325,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -404,7 +407,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedback", (string)null);
+                    b.ToTable("Feedback");
 
                     b.HasData(
                         new
@@ -461,7 +464,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PortfolioItemImages", (string)null);
+                    b.ToTable("PortfolioItemImages");
 
                     b.HasData(
                         new
@@ -537,7 +540,7 @@ namespace personal_website.Server.Migrations
                     b.HasIndex("ImageID")
                         .IsUnique();
 
-                    b.ToTable("PortfolioItems", (string)null);
+                    b.ToTable("PortfolioItems");
 
                     b.HasData(
                         new

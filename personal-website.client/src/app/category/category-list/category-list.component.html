@@ -1,0 +1,11 @@
+<!--<pre>{{ categories | async | json }}</pre>-->
+
+<!--TODO: Create the element to display-->
+
+<div *ngFor="let categoryItem of (categories | async)">
+  <h2>{{ categoryItem.categoryName }}</h2>
+  <button routerLink="{{ categoryItem.id }}">View {{ categoryItem.categoryName }}</button>
+</div>
+<button (click)="CreateCategory()">Create Category</button>
+
+<!--<p>category-list works!</p>-->

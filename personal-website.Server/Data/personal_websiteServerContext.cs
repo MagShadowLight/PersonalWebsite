@@ -175,7 +175,8 @@ namespace personal_website.Server.Data
                         FeedbackName = "Website",
                         Email = "test@test.com",
                         FeedbackComment = "I love this website",
-                        NeededResponse = false
+                        NeededResponse = false,
+                        IsResolved = false
                     },
                     new Feedback
                     {
@@ -183,7 +184,8 @@ namespace personal_website.Server.Data
                         FeedbackName = "Security Vulnerability",
                         Email = "meow@meow.com",
                         FeedbackComment = "This website has security vulnerability",
-                        NeededResponse = true
+                        NeededResponse = true,
+                        IsResolved = true
                     },
                     new Feedback
                     {
@@ -191,7 +193,8 @@ namespace personal_website.Server.Data
                         FeedbackName = "Fake News",
                         Email = "Real@fake.com",
                         FeedbackComment = "This previous post is a lie",
-                        NeededResponse = false
+                        NeededResponse = false,
+                        IsResolved = true
                     }
                 );
             // PortfolioItemImages
