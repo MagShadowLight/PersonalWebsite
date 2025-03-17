@@ -278,7 +278,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
 
                     b.HasData(
                         new
@@ -322,7 +322,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -404,7 +404,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedback");
+                    b.ToTable("Feedback", (string)null);
 
                     b.HasData(
                         new
@@ -461,7 +461,7 @@ namespace personal_website.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PortfolioItemImages");
+                    b.ToTable("PortfolioItemImages", (string)null);
 
                     b.HasData(
                         new
@@ -537,7 +537,7 @@ namespace personal_website.Server.Migrations
                     b.HasIndex("ImageID")
                         .IsUnique();
 
-                    b.ToTable("PortfolioItems");
+                    b.ToTable("PortfolioItems", (string)null);
 
                     b.HasData(
                         new

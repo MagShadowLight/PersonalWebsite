@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { PortfolioItems } from '../../models/IPortfolioItems';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DataService } from '../../data.service';
@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './portfolios-edit.component.html',
   styleUrl: './portfolios-edit.component.css'
 })
-export class PortfoliosEditComponent implements OnInit {
+export class PortfoliosEditComponent implements OnInit, OnDestroy {
   item: PortfolioItems = {
       id: 0,
       displayName: '',
@@ -42,16 +42,20 @@ export class PortfoliosEditComponent implements OnInit {
   isEditing: Boolean = false;
 
   itemForm: FormGroup = new FormGroup({});
+  subscription: Subscription;
   //id: number = 0;
   //item$: BehaviorSubject<PortfolioItems>
 
   constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
     //this.item$ = this.data.portfolioItem$
-    this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getItemData();
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   getItemData() {
     this.route.paramMap.subscribe(getId => {

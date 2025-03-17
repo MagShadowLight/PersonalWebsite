@@ -3,6 +3,7 @@ import { Category } from '../../models/ICategory';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DataService } from '../../data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-edit',
@@ -21,9 +22,10 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
   isEditing: boolean = false;
   categoryForm: FormGroup = new FormGroup({});
+  subscription: Subscription
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.getCategoryData();
       }
@@ -99,6 +101,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
     //throw new Error('Method not implemented.');
   }
 
