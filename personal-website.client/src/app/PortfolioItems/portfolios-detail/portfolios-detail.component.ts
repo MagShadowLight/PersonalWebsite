@@ -20,7 +20,7 @@ export class PortfoliosDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.getPortfolioItemById(this.id);
     });
@@ -31,7 +31,7 @@ export class PortfoliosDetailComponent implements OnInit{
     console.log(item.value, this.id)
 
     if (item != undefined) {
-      this.data.deleteItem(this.id).subscribe(result => {
+      this.data.deleteItem(this.id).subscribe((result : any) => {
         this.router.navigate(['/portfolio']);
       });
     }

@@ -123,21 +123,21 @@ export class DataService {
     
   }
 
-  getAllBlogs(): void {
-    this._http.get<Blogs[]>('/api/blogs').subscribe(data => {
+  getAllBlogs() {
+    this._http.get<Blogs[]>('/api/blogs').subscribe((data : any) => {
       this.blogs$.next(data);
     });
   }
 
   getBlogsbyId(id: number) {
-    this._http.get<Blogs>(`/api/blogs/${id}`).subscribe(data => {
+    this._http.get<Blogs>(`/api/blogs/${id}`).subscribe((data : any) => {
       this.blog$.next(data);
     });
   }
 
   getBlogInfoById(id: number): Observable<Blogs> {
     return this._http.get<Blogs>(`/api/blogs/${id}`).pipe(
-      tap(data => this.blog$.next(data))
+      tap((data : any) => this.blog$.next(data))
     );
   }
 
@@ -154,20 +154,20 @@ export class DataService {
   }
 
   getAllPortfolioItems(): void {
-    this._http.get<PortfolioItems[]>('/api/PortfolioItems').subscribe(data => {
+    this._http.get<PortfolioItems[]>('/api/PortfolioItems').subscribe((data : any) => {
       this.portfolioItems$.next(data);
     });
   }
 
   getPortfolioItemById(id: number) {
-    this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe(data => {
+    this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe((data : any) => {
       this.portfolioItem$.next(data);
     });
   }
 
   getItemInfoById(id: number): Observable<PortfolioItems> {
     return this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).pipe(
-      tap(data => this.portfolioItem$.next(data))
+      tap((data : any) => this.portfolioItem$.next(data))
     );
   }
 
@@ -184,20 +184,20 @@ export class DataService {
   }
 
   getAllCategories(): void {
-    this._http.get<Category[]>('/api/Categories').subscribe(data => {
+    this._http.get<Category[]>('/api/Categories').subscribe((data : any) => {
       this.categories$.next(data);
     })
   }
 
   getCategoryById(id: number) {
-    this._http.get<Category>(`/api/Categories/${id}`).subscribe(data => {
+    this._http.get<Category>(`/api/Categories/${id}`).subscribe((data : any) => {
       this.category$.next(data);
     })
   }
 
   getCategoryInfoById(id: number): Observable<Category> {
     return this._http.get<Category>(`/api/Categories/${id}`).pipe(
-      tap(data => this.category$.next(data))
+      tap((data : any) => this.category$.next(data))
     );
   }
 
@@ -214,20 +214,20 @@ export class DataService {
   }
 
   GetAllFeedback(): void {
-    this._http.get<Feedback[]>('/api/Feedbacks').subscribe(data => {
+    this._http.get<Feedback[]>('/api/Feedbacks').subscribe((data : any) => {
       this.feedbacks$.next(data);
     });
   }
 
   GetFeedbackById(id: number): void {
-    this._http.get<Feedback>(`/api/Feedbacks/${id}`).subscribe(data => {
+    this._http.get<Feedback>(`/api/Feedbacks/${id}`).subscribe((data : any) => {
       this.feedback$.next(data);
     });
   }
 
   GetFeedbackInfoById(id: number): Observable<Feedback> {
     return this._http.get<Feedback>(`/api/Feedbacks/${id}`).pipe(
-      tap(data => this.feedback$.next(data))
+      tap((data : any) => this.feedback$.next(data))
     );
   }
 

@@ -48,7 +48,7 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
 
   constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
     //this.item$ = this.data.portfolioItem$
-    this.subscription = this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe((event : any) => {
       if (event instanceof NavigationEnd) {
         this.getItemData();
       }
@@ -58,7 +58,7 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   getItemData() {
-    this.route.paramMap.subscribe(getId => {
+    this.route.paramMap.subscribe((getId : any) => {
       this.item.id = +getId.get('id')!;
     });
     console.log(this.item.id);
@@ -79,7 +79,7 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
         );
         this.loadForm(this.item);
       },
-        error => console.error('Error fetching Items in Portfolio.', error)
+        (error : any) => console.error('Error fetching Items in Portfolio.', error)
       );
     }
     //throw new Error('Method not implemented.');
@@ -156,14 +156,14 @@ export class PortfoliosEditComponent implements OnInit, OnDestroy {
 
     console.log(savedItem);
     if (this.isEditing) {
-      this.data.updateItem(this.item.id, savedItem).subscribe(result => {
+      this.data.updateItem(this.item.id, savedItem).subscribe((result : any) => {
         this.router.navigate(['/']);
       });
     } else {
-      this.data.createItem(savedItem).subscribe(result => {
+      this.data.createItem(savedItem).subscribe((result : any) => {
         this.router.navigate(['/']);
       },
-        error => {
+        (error : any) => {
           console.error("Error: Unable to create Items")
         })
     }

@@ -19,7 +19,7 @@ export class CategoryDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.getCategoryById(this.id);
     });
@@ -29,7 +29,7 @@ export class CategoryDetailComponent implements OnInit{
     let deletedCategory = this.category;
 
     if (deletedCategory != undefined) {
-      this.data.DeleteCategory(this.id).subscribe(result => {
+      this.data.DeleteCategory(this.id).subscribe((result : any) => {
         this.router.navigate(['category']);
       });
     }

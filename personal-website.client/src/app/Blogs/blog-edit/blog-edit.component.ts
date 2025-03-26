@@ -43,7 +43,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
   subscription: Subscription
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {
     //this.initFormAsEmpty();
-    this.subscription = this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe((event : any) => {
       if (event instanceof NavigationEnd) {
         this.getBlogData();
       }
@@ -63,7 +63,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
   }
 
   getBlogData() : void {
-    this.route.paramMap.subscribe(getId => {
+    this.route.paramMap.subscribe((getId : any) => {
       this.blog.id = +getId.get('id')!;
     });
     console.log(this.blog.id)
@@ -86,7 +86,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
           Body: ${this.blog.body}`);
         this.loadForm(this.blog);
       },
-      error => console.error('Error fetching Blogs.', error)
+      (error : any) => console.error('Error fetching Blogs.', error)
       );
     }
   }
@@ -141,7 +141,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
 
     console.log(savedBlog);
     if (this.isEditing) {
-      this.data.updateBlog(this.blog.id, savedBlog).subscribe(result => {
+      this.data.updateBlog(this.blog.id, savedBlog).subscribe((result : any) => {
         this.router.navigate(['/']);
       });
     } else {
@@ -158,13 +158,13 @@ export class BlogEditComponent implements OnInit, OnDestroy {
       //  // place Category in Blogs
       //  savedBlog.category = this.category;
       this.blog = savedBlog
-      this.data.createBlog(savedBlog).subscribe(result => {
+      this.data.createBlog(savedBlog).subscribe((result : any) => {
         //console.log('Data should go through with category')
         this.router.navigate(['/blog']);
       },
-        error => {
-          console.error("Error: Unable to create Blogs")
-        });
+      (error : any) => {
+        console.error("Error: Unable to create Blogs")
+      });
     }
   }
 

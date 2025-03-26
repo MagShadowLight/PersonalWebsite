@@ -1,13 +1,18 @@
 <!--<pre>{{ portfolioItems$ | async | json}}</pre>-->
-
-<div *ngFor="let Items of (portfolioItems$ | async)">
-  <h4>{{ Items.title }}</h4>
-  <p>{{ Items.creationDate | date:'mediumDate' }}</p>
-  <p>{{ Items.updatedDate | date:'mediumDate' }}</p>
-  <p>{{ Items.version }}</p>
-  <p>{{ Items.category.categoryName }}</p>
-  <button routerLink="{{ Items.id }}">View {{ Items.displayName }}</button>
+<div class="portfolio container-fluid row">
+  <div class="bg-info card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" *ngFor="let Items of (portfolioItems$ | async)">
+    <div class="card-body">
+      <h4>{{ Items.title }}</h4>
+      <p>{{ Items.creationDate | date:'mediumDate' }}</p>
+      <p>{{ Items.updatedDate | date:'mediumDate' }}</p>
+      <p>{{ Items.version }}</p>
+      <p>{{ Items.category.categoryName }}</p>
+      <button class="btn btn-primary" routerLink="{{ Items.id }}">View {{ Items.displayName }}</button>
+    </div>
+  </div>
 </div>
-<button (click)="CreateItem()" *ngIf="isAuthenticated()">Create Item</button>
+<div class="text-center mt-4">
+  <button class="btn btn-success col-2" (click)="CreateItem()" *ngIf="isAuthenticated()">Create Item</button>
+</div>
 
 <!--<p>portfolios-list works!</p>-->

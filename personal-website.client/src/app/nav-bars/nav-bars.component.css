@@ -1,4 +1,8 @@
 .navbar {
     border-bottom: 2px solid blue;
     padding: 20px 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }

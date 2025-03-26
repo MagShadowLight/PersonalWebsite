@@ -20,9 +20,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     //console.log("Loading User")
-    this.auth.loadCurrentUser().subscribe(error => {
-      console.log("You are not authorized")
-    });
+    //this.auth.loadCurrentUser().subscribe((error : any) => {
+    //  console.log("You are not authorized")
+    //});
   }
 
 

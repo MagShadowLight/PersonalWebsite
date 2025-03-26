@@ -25,7 +25,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
   subscription: Subscription
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.subscription = this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe((event : any) => {
       if (event instanceof NavigationEnd) {
         this.getCategoryData();
       }
@@ -40,7 +40,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
   }
 
   getCategoryData() {
-    this.route.paramMap.subscribe(getId => {
+    this.route.paramMap.subscribe((getId : any) => {
       this.category.id = +getId.get('id')!;
     });
 
@@ -56,7 +56,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
         this.loadForm(this.category);
       },
-        error => console.error('Error fetching category:', error)
+        (error : any) => console.error('Error fetching category:', error)
       );
     }
   }
@@ -90,11 +90,11 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
     }
 
     if (this.isEditing) {
-      this.data.UpdateCategory(this.category.id, savedCategory).subscribe(result => {
+      this.data.UpdateCategory(this.category.id, savedCategory).subscribe((result : any) => {
         this.router.navigate(['category'])
       });
     } else {
-      this.data.CreateCategory(savedCategory).subscribe(result => {
+      this.data.CreateCategory(savedCategory).subscribe((result : any) => {
         this.router.navigate(['category']);
       });
     }

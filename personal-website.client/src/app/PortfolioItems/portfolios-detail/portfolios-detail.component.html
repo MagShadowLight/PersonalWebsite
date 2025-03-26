@@ -1,17 +1,23 @@
 <!--<pre>{{ portfolioItem$ | async | json }}</pre>-->
 
-<div>
-  <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}">
-  <h1>{{(portfolioItem$ | async)!.title }}</h1>
-  <p>{{ (portfolioItem$ | async)!.description }}</p>
-  <p>{{ (portfolioItem$ | async)!.creationDate | date:'mediumDate'}}</p>
-  <p>{{ (portfolioItem$ | async)!.updatedDate | date:'mediumDate' }}</p>
-  <p>{{ (portfolioItem$ | async)!.version }}</p>
-  <p>{{ (portfolioItem$ | async)!.category.categoryName }}</p>
-  <a href="{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
-  <button routerLink="../">Back to Portfolio List</button>
-  <button routerLink="/portfolio/edit/{{ (portfolioItem$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
-  <button (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
+<div class="portfolio container-fluid col-md-6 col-lg-4">
+  <div class="card text-center bg-info p-4 border-4 border-primary">
+    <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}">
+    <div class="card-body">
+      <h1>{{(portfolioItem$ | async)!.title }}</h1>
+      <p>{{ (portfolioItem$ | async)!.description }}</p>
+      <p>{{ (portfolioItem$ | async)!.creationDate | date:'mediumDate'}}</p>
+      <p>{{ (portfolioItem$ | async)!.updatedDate | date:'mediumDate' }}</p>
+      <p>{{ (portfolioItem$ | async)!.version }}</p>
+      <p>{{ (portfolioItem$ | async)!.category.categoryName }}</p>
+      <div>
+        <a class="btn btn-secondary mb-4" href="{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
+      </div>
+      <button class="btn btn-primary" routerLink="../">Back to Portfolio List</button>
+      <button class="btn btn-success" routerLink="/portfolio/edit/{{ (portfolioItem$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
+      <button class="btn btn-danger" (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
+    </div>
+  </div>
 </div>
 
 

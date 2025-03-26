@@ -25,7 +25,7 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.subscription = this.router.events.subscribe(event => {
+    this.subscription = this.router.events.subscribe((event : any) => {
       if (event instanceof NavigationEnd) {
         this.getFeedbackData();
       }
@@ -37,7 +37,7 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
   }
 
   getFeedbackData() {
-    this.route.paramMap.subscribe(getId => {
+    this.route.paramMap.subscribe((getId : any) => {
       this.feedback.id = +getId.get('id')!;
     });
 
@@ -46,7 +46,7 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
 
       this.loadForm(this.feedback);
     },
-      error => console.error('Error fetching feedback:', error)
+      (error : any) => console.error('Error fetching feedback:', error)
     );
   }
 
@@ -81,7 +81,7 @@ export class FeedbackEditComponent implements OnInit, OnDestroy {
       isResolved: this.feedbackForm.value.isResolved
     };
 
-    this.data.UpdateFeedback(this.feedback.id, savedFeedback).subscribe(result => {
+    this.data.UpdateFeedback(this.feedback.id, savedFeedback).subscribe((result : any) => {
       this.router.navigate(['feedback']);
     });
   }
