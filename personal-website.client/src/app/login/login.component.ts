@@ -62,7 +62,7 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         next: () => {
           this.router.navigate(['/'])
         },
-        error: (error) => {
+        error: (error : any) => {
           if (error.status === 400 || error.status === 401) {
             this.errorMessage = 'Error: Email or password are Invalid. Type in the correct email and password.'
           } else if (error.status === 0) {

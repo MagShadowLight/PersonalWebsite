@@ -35,7 +35,7 @@ export class BlogDetailComponent implements OnInit{
     this.blog$ = this.data.blog$;
   }
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.getBlogsbyId(this.id);
     });
@@ -46,7 +46,7 @@ export class BlogDetailComponent implements OnInit{
     console.log(blog.value, this.id)
 
     if (blog != undefined) {
-      this.data.deleteBlog(this.id).subscribe(result => {
+      this.data.deleteBlog(this.id).subscribe((result : any) => {
         this.router.navigate(['/blog']);
       });
     }

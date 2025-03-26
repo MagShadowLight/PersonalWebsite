@@ -5,13 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarsComponent } from './nav-bars/nav-bars.component';
-import { BlogListComponent } from './blogs/blog-list/blog-list.component';
-import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
 import { PortfoliosListComponent } from './PortfolioItems/portfolios-list/portfolios-list.component';
 import { PortfoliosDetailComponent } from './PortfolioItems/portfolios-detail/portfolios-detail.component';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
-import { BlogEditComponent } from './blogs/blog-edit/blog-edit.component';
 import { PortfoliosEditComponent } from './PortfolioItems/portfolios-edit/portfolios-edit.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +20,11 @@ import { FeedbackDetailComponent } from './Feedback/feedback-detail/feedback-det
 import { FeedbackEditComponent } from './Feedback/feedback-edit/feedback-edit.component';
 import { FeedbackFormComponent } from './Feedback/feedback-form/feedback-form.component';
 import { FeedbackListComponent } from './Feedback/feedback-list/feedback-list.component';
+import { BlogDetailComponent } from './Blogs/blog-detail/blog-detail.component';
+import { BlogEditComponent } from './Blogs/blog-edit/blog-edit.component';
+import { BlogListComponent } from './Blogs/blog-list/blog-list.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { FeedbackListComponent } from './Feedback/feedback-list/feedback-list.co
     FeedbackFormComponent,
     FeedbackListComponent,
     FeedbackDetailComponent,
-    FeedbackEditComponent
+    FeedbackEditComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

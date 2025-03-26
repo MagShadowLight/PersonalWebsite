@@ -1,0 +1,15 @@
+.bg-info {
+  background-color: #33ff55 !important;
+}
+
+.actions {
+  margin-top: 70px;
+}
+
+.btn-primary {
+    background-color: black;
+}
+
+.btn-primary:active {
+    background-color: gray;
+}

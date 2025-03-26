@@ -55,7 +55,7 @@ export class FeedbackFormComponent implements OnInit {
     this.isCreated = true;
     this.data.CreateFeedback(savedFeedback).pipe(
       delay(3000)
-    ).subscribe(result => {
+    ).subscribe((result : any) => {
       this.isCreated = false;
     });
     

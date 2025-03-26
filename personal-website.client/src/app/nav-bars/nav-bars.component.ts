@@ -32,7 +32,7 @@ export class NavBarsComponent {
       next: () => {
         this.router.navigate(['/']);
       },
-      error: (errorMessage) => {
+      error: (errorMessage : any) => {
         console.error('Logout error:', errorMessage)
         this.router.navigate(['/'])
       }

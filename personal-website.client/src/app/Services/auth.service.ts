@@ -9,13 +9,13 @@ import { LoginDto } from '../models/ILoginDto';
 })
 export class AuthService {
   private currentUserBehaviorSubject = new BehaviorSubject<UserDto | null>(null);
-  public currentUser$ = this.currentUserBehaviorSubject.asObservable();
+  public currentUser$ = this.currentUserBehaviorSubject;
 
   constructor(private _httpClient: HttpClient) { }
 
   login(credentials: LoginDto): Observable<UserDto> {
     return this._httpClient.post<UserDto>('/api/Auth/login', credentials).pipe(
-      tap(user => {
+      tap((user : any) => {
         //console.log("Logging in")
         this.currentUserBehaviorSubject.next(user);
         console.log(this.currentUserBehaviorSubject.value)
@@ -33,7 +33,7 @@ export class AuthService {
 
   public loadCurrentUser(): Observable<UserDto | null> {
     return this._httpClient.get<UserDto>('/api/Auth/current').pipe(
-      tap(user => {
+      tap((user : UserDto) => {
         //console.log("User Loaded")
         //console.log(this.currentUserBehaviorSubject.value)
         this.currentUserBehaviorSubject.next(user);

@@ -19,7 +19,7 @@ export class FeedbackDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.GetFeedbackById(this.id);
     });
@@ -29,7 +29,7 @@ export class FeedbackDetailComponent implements OnInit {
     let deletedFeedback = this.feedback;
 
     if (deletedFeedback != undefined) {
-      this.data.DeleteFeedback(this.id).subscribe(result => {
+      this.data.DeleteFeedback(this.id).subscribe((result : any) => {
         this.router.navigate(['feedback']);
       });
     }

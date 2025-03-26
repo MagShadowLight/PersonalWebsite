@@ -2,15 +2,19 @@
 {{ blog$ | async | json }}
 </pre>-->
 
-<div>
-  <h1>{{(blog$ | async)!.title }}</h1>
-  <p>{{ (blog$ | async)!.body }}</p>
-  <p>{{ (blog$ | async)!.createdDate | date:'mediumDate'}}</p>
-  <p>{{ (blog$ | async)!.updatedDate | date:'mediumDate' }}</p>
-  <p>{{ (blog$ | async)!.category.categoryName }}</p>
-  <button routerLink="../">Back to Blog List</button>
-  <button routerLink="/blog/edit/{{ (blog$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
-  <button (click)="DeletePost()" *ngIf="isAuthenticated()">Delete</button>
+<div class="container col-md-6 col-lg-4">
+  <div class="card text-center bg-info p-4 border-4 border-primary">
+    <h1>{{(blog$ | async)!.title }}</h1>
+    <p>{{ (blog$ | async)!.body }}</p>
+    <p>{{ (blog$ | async)!.createdDate | date:'mediumDate'}}</p>
+    <p>{{ (blog$ | async)!.updatedDate | date:'mediumDate' }}</p>
+    <p>{{ (blog$ | async)!.category.categoryName }}</p>
+    <div>
+      <button class="btn btn-primary" routerLink="../">Back to Blog List</button>
+      <button class="btn btn-success" routerLink="/blog/edit/{{ (blog$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
+      <button class="btn btn-danger" (click)="DeletePost()" *ngIf="isAuthenticated()">Delete</button>
+    </div>
+  </div>
 </div>
 
 <!--<p>blog-detail works!</p>-->

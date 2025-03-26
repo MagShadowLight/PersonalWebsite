@@ -1,29 +1,45 @@
 <!--<pre>{{ blog | json }}</pre-->
 
 
-<form [formGroup]="blogForm" (ngSubmit)="onSaveButton()">
-  <div>
-    <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title" class="form-control" placeholder="title"/>
-  </div>
-  <div>
-    <label for="displayName">Display Name</label>
-    <input id="displayName" type="text" formControlName="displayName" class="form-control" placeholder="Display Name">
-  </div>
-  <div>
-    <label for="body">Body</label>
-    <input id="body" type="text" formControlName="body" class="form-control" placeholder="Body">
-  </div>
-  <div>
-    <label for="Visibility">Visibility</label>
-    <input id="visibility" type="text" formControlName="visibility" class="form-control" placeholder="Visibility">
-  </div>
 
-  <div>
-    <label for="CategoryID">CategoryID</label>
-    <input id="categoryID" type="text" formControlName="categoryId" class="form-control" placeholder="CategoryID">
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="container col-xl-6 col-lg-9 col-md-9 col-sm-12">
+  <h2 *ngIf="isEditing">Editing Blog</h2>
+  <h2 *ngIf="!isEditing">Creating Blog</h2>
+  <form class=" bg-info p-4 rounded-3" [formGroup]="blogForm" (ngSubmit)="onSaveButton()">
+    <div class="mb-3 row">
+      <label class="col-form-label col-sm-3" for="title">Title</label>
+      <div class="col-sm-9">
+        <input id="title" type="text" formControlName="title" class="form-control col-10" placeholder="title" />
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-form-label col-sm-3" for="displayName">Display Name</label>
+      <div class="col-sm-9">
+        <input id="displayName" type="text" formControlName="displayName" class="form-control" placeholder="Display Name">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-form-label col-sm-3" for="body">Body</label>
+      <div class="col-sm-9">
+        <input id="body" type="text" formControlName="body" class="form-control" placeholder="Body">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-form-label col-sm-3" for="Visibility">Visibility</label>
+      <div class="col-sm-9">
+        <input id="visibility" type="text" formControlName="visibility" class="form-control" placeholder="Visibility">
+      </div>
+    </div>
 
-<p>blog-edit works!</p>
+    <div class="mb-3 row">
+      <label class="col-form-label col-sm-3" for="CategoryID">CategoryID</label>
+      <div class="col-sm-9">
+        <input id="categoryID" type="text" formControlName="categoryId" class="form-control" placeholder="CategoryID">
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-success col-4" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+

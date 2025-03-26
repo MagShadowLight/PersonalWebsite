@@ -8,9 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PortfoliosEditComponent } from './PortfolioItems/portfolios-edit/portfolios-edit.component';
 import { LoginComponent } from './login/login.component';
 import { authGuardGuard } from './Guards/auth-guard.guard';
-import { BlogDetailComponent } from './blogs/blog-detail/blog-detail.component';
-import { BlogEditComponent } from './blogs/blog-edit/blog-edit.component';
-import { BlogListComponent } from './blogs/blog-list/blog-list.component';
+
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryDetailComponent } from './category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
@@ -18,9 +16,15 @@ import { FeedbackListComponent } from './Feedback/feedback-list/feedback-list.co
 import { FeedbackEditComponent } from './Feedback/feedback-edit/feedback-edit.component';
 import { FeedbackDetailComponent } from './Feedback/feedback-detail/feedback-detail.component';
 import { FeedbackFormComponent } from './Feedback/feedback-form/feedback-form.component';
+import { BlogDetailComponent } from './Blogs/blog-detail/blog-detail.component';
+import { BlogEditComponent } from './Blogs/blog-edit/blog-edit.component';
+import { BlogListComponent } from './Blogs/blog-list/blog-list.component';
+import { AboutComponent } from './about/about.component';
+
 
 const routes: Routes = [
-  { path: "", component: HomeComponent},
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
   { path: "blog", component: BlogListComponent },
   { path: "blog/create", component: BlogEditComponent, canActivate: [authGuardGuard] },
   { path: "blog/:id", component: BlogDetailComponent },

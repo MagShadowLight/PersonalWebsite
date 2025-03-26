@@ -1,36 +1,53 @@
 <!--<pre>{{ item! | json }}</pre>-->
 
-<form [formGroup]="itemForm" (ngSubmit)="onSave()">
-  <div>
-    <label for="displayName">Display Name:</label>
-    <input id="displayName" type="text" formControlName="displayName" class="form-control" placeholder="Display Name" />
-  </div>
-  <div>
-    <label for="title">Title:</label>
-    <input id="title" type="text" formControlName="title" class="form-control" placeholder="Title" />
-  </div>
-  <div>
-    <label for="description">Description:</label>
-    <input id="description" type="text" formControlName="description" class="form-control" placeholder="Description" />
-  </div>
-  <div>
-    <label for="version">Version:</label>
-    <input id="version" type="text" formControlName="version" class="form-control" placeholder="Version" />
-  </div>
-  <div>
-    <label for="links">Links:</label>
-    <input id="links" type="text" formControlName="links" class="form-control" placeholder="Links" />
-  </div>
-  <div>
-    <label categoryId>CategoryID:</label>
-    <input id="categoryId" type="text" formControlName="categoryId" class="form-control" placeholder="Category ID" />
-  </div>
-  <div>
-    <label for="imageId"></label>
-    <input id="imageId" type="text" formControlName="imageId" class="form-control" placeholder="Image ID" />
-  </div>
-
-  <button type="submit">Submit</button>
-</form>
-
-<p>portfolios-edit works!</p>
+<div class="portfolio container-fluid col-xl-6 col-lg-9 col-md-9 col-sm-12">
+  <h2 *ngIf="isEditing">Editing Item</h2>
+  <h2 *ngIf="!isEditing">Creating Item</h2>
+  <form class="bg-info p-4 rounded-3" [formGroup]="itemForm" (ngSubmit)="onSave()">
+    <div class="row mb-3">
+      <label class="col-form-label col-3" for="displayName">Display Name:</label>
+      <div class="col-9">
+        <input id="displayName" type="text" formControlName="displayName" class="form-control col-12" placeholder="Display Name" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="title">Title:</label>
+      <div class="col-9">
+        <input id="title" type="text" formControlName="title" class="form-control" placeholder="Title" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="description">Description:</label>
+      <div class="col-9">
+        <input id="description" type="text" formControlName="description" class="form-control" placeholder="Description" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="version">Version:</label>
+      <div class="col-9">
+        <input id="version" type="text" formControlName="version" class="form-control" placeholder="Version" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="links">Links:</label>
+      <div class="col-9">
+        <input id="links" type="text" formControlName="links" class="form-control" placeholder="Links" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="categoryId">CategoryID:</label>
+      <div class="col-9">
+        <input id="categoryId" type="text" formControlName="categoryId" class="form-control" placeholder="Category ID" />
+      </div>
+    </div>
+    <div class="row mb-4">
+      <label class="col-form-label col-3" for="imageId">ImageID:</label>
+      <div class="col-9">
+        <input id="imageId" type="text" formControlName="imageId" class="form-control" placeholder="Image ID" />
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-success col-4" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
