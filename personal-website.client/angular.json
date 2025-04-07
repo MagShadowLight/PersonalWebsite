@@ -110,7 +110,10 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "buildTarget": "personal-website.client:build:production"
+          }
         }
       }
     }
