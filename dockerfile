@@ -15,5 +15,5 @@ COPY --from=build /app ./
 
 ENV ASPNETCore_URLS=https://+:${PORT}
 
-EXPOSE 10000
+EXPOSE 7164
 ENTRYPOINT [ "dotnet", "personal-website.Server.dll" ]
