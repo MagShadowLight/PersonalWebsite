@@ -2,10 +2,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY personal-website.Server/*.csproj ./personal-website.Server/
-WORKDIR /src/personal-website.Server
-RUN dotnet restore 
+RUN dotnet restore ./personal-website.Server/personal-website.Server.csproj
 
 COPY . .
+WORKDIR /src/personal-website.Server
 RUN dotnet publish personal-website.Server.csproj -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
