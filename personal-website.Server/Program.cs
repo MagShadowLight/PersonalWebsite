@@ -41,6 +41,9 @@ namespace personal_website.Server
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            var imagepath = Path.Combine(AppContext.BaseDirectory, "Images");
+            if (!Directory.Exists(imagepath))
+                Directory.CreateDirectory(imagepath);
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
