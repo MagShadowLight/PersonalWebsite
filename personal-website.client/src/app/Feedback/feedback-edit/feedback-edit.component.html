@@ -1,28 +1,39 @@
 <!--<pre>{{ feedback | json }}</pre>-->
 
 <!--TODO: Create Form to update Feedback-->
-<form [formGroup]="feedbackForm" (ngSubmit)="onSave()">
-  <div>
-    <label for="feedbackName">Feedback Title</label>
-    <input id="feedbackName" type="text" formControlName="feedbackName" class="form-control" placeholder="Feedback Title"/>
-  </div>
-  <div>
-    <label for="email">Email</label>
-    <input id="email" type="text" formControlName="email" class="form-control" placeholder="Email" />
-  </div>
-  <div>
-    <label for="comment">Comment</label>
-    <input id="comment" type="text" formControlName="comment" class="form-control" placeholder="Comment"/>
-  </div>
-  <div>
-    <label for="responseRequired">Need Response?</label>
-    <input id="responseRequired" type="checkbox" formControlName="responseRequired"/>
-  </div>
-  <div>
-    <label for="isResolved">Resolved?</label>
-    <input id="isResolved" type="checkbox" formControlName="isResolved"/>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="feedback-edit-container container-fluid col-xl-6 col-lg-9 col-md-9 col-sm-12 bg-info p-4 spacer">
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSave()">
+    <h2>Editing feedback</h2>
+    <div class="row mb-3 mt-3">
+      <label class="col-form-label col-3" for="feedbackName">Feedback Title</label>
+      <div class="col-9">
+        <input id="feedbackName" type="text" formControlName="feedbackName" class="form-control" placeholder="Feedback Title" />
+      </div>
+    </div>
+    <div class="row mb-3 mt-3">
+      <label class="col-form-label col-3" for="email">Email</label>
+      <div class="col-9">
+        <input id="email" type="text" formControlName="email" class="form-control" placeholder="Email" />
+      </div>
+    </div>
+    <div class="row mb-3 mt-3">
+      <label class="col-3" for="comment">Comment</label>
+      <div class="col-9">
+        <input id="comment" type="text" formControlName="comment" class="form-control" placeholder="Comment" />
+      </div>
+    </div>
+    <div class="form-check form-switch mt-3 mb-3">
+      <label class="form-check-label" for="responseRequired">Need Response?</label>
+      <input class="form-check-input" id="responseRequired" type="checkbox" formControlName="responseRequired" />
+    </div>
+    <div class="form-check form-switch mt-3 mb-3">
+      <label class="form-check-label" for="isResolved">Resolved?</label>
+      <input class="form-check-input" id="isResolved" type="checkbox" formControlName="isResolved" />
+    </div>
+    <div class="text-center">
+      <button class="btn btn-success pe-5 ps-5" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
 
 <!--<p>feedback-edit works!</p>-->

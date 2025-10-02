@@ -16,6 +16,7 @@ namespace personal_website.Server.Data
         public personal_websiteServerContext (DbContextOptions<personal_websiteServerContext> options)
             : base(options)
         {
+            
         }
 
         public static async Task SeedUserAsync(UserManager<PersonalUser> userManager)
@@ -250,7 +251,7 @@ namespace personal_website.Server.Data
                         CreationDate = new DateTime(),
                         UpdatedDate = new DateTime(),
                         Version = "0.0.3",
-                        Links = "meow.com",
+                        Links = "example.com",
                         CategoryId = 7,
                         Category = null,
                         Image = null,
@@ -265,7 +266,7 @@ namespace personal_website.Server.Data
                         CreationDate = new DateTime(),
                         UpdatedDate = new DateTime(),
                         Version = "0.1.0",
-                        Links = "woof.com",
+                        Links = "gitlab.com",
                         CategoryId = 3,
                         Category = null,
                         Image = null,

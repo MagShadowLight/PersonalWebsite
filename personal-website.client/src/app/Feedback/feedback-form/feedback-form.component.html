@@ -1,7 +1,7 @@
 <!--<pre>{{ feedback | json }}</pre>-->
 
 <!--TODO: Create form to create feedback-->
-<form class="container col-lg-6 bg-primary p-4" [formGroup]="feedbackForm" (ngSubmit)="onSave()">
+<form class="container bg-primary p-4" [formGroup]="feedbackForm" (ngSubmit)="onSave()">
   <div>
     <label for="feedbackName" class="form-label">Title</label>
     <input id="feedbackName" type="text" formControlName="feedbackName" class="form-control" placeholder="Title"/>

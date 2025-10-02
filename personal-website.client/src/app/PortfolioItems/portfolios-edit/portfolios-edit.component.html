@@ -1,6 +1,6 @@
 <!--<pre>{{ item! | json }}</pre>-->
 
-<div class="portfolio container-fluid col-xl-6 col-lg-9 col-md-9 col-sm-12">
+<div class="portfolio container-fluid col-xl-6 col-lg-9 col-md-9 col-sm-12 spacer">
   <h2 *ngIf="isEditing">Editing Item</h2>
   <h2 *ngIf="!isEditing">Creating Item</h2>
   <form class="bg-info p-4 rounded-3" [formGroup]="itemForm" (ngSubmit)="onSave()">

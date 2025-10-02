@@ -1,11 +1,9 @@
 .footer {
   display: flex;
-  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   border-top: 2px solid blue;
-  height: 60px;
 }
 
 .hor-container {
@@ -13,4 +11,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.links {
+    width: 200px;
+}
+
+.social {
+    width: 250px;
 }

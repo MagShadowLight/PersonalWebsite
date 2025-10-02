@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Versioning;
+using personal_website.core;
 using personal_website.Server.Data;
 using personal_website.Server.Models;
 
@@ -83,6 +84,21 @@ namespace personal_website.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Blogs>> PostBlogs(Blogs blogs)
         {
+            var file = new FileData();
+            //string path = "C:\\Users\\Willi\\OneDrive\\Desktop\\Side Projects\\Personal Website\\personal-website.Server\\Logs";
+            string path = Path.Combine("Data", "Blogs.txt");
+            string blog = $"Id: {blogs.Id.ToString()}\n" +
+                $"DisplayName: {blogs.DisplayName}\n" +
+                $"Title: {blogs.Title}\n" +
+                $"Body: {blogs.Body}\n" +
+                $"Created at: {blogs.CreatedDate.ToString()}\n" +
+                $"Updated at: {blogs.UpdatedDate.ToString()}\n" +
+                $"Visibility: {blogs.Visibility.ToString()}\n" +
+                $"Category Id: {blogs.CategoryId.ToString()}\n";
+            file.BlogFileWriter(path, blog);
+            
+            
+
             if (blogs.CategoryId > 0)
             {
                 // get category

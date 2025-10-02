@@ -1,17 +1,27 @@
 <!--<pre>{{ category | json }}</pre>-->
 
 <!--TODO: Create Form to create and edit category-->
-<form [formGroup]="categoryForm" (ngSubmit)="onSave()">
-  <div>
-    <label for="categoryName">Category Name</label>
-    <input id="categoryName" type="text" formControlName="categoryName" class="form-control" placeholder="Category Name"/>
-  </div>
-  <div>
-    <label for="parentCategoryId">Parent Category Number</label>
-    <input id="parentCategoryId" type="text" formControlName="parentCategoryId" class="form-control" placeholder="Parent Category Number"/>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="category-form-container container col-xl-6 col-lg-9 col-md-9 col-sm-12 bg-info rounded-3 spacer">
+  <h2 *ngIf="isEditing">Editing Category</h2>
+  <h2 *ngIf="!isEditing">Creating Category</h2>
+  <form class="pb-2 pt-2 rounded-3" [formGroup]="categoryForm" (ngSubmit)="onSave()">
+    <div class="row mb-3">
+      <label class="col-form-label col-4" for="categoryName">Category Name</label>
+      <div class="col-8">
+        <input id="categoryName" type="text" formControlName="categoryName" class="form-control" placeholder="Category Name" />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-form-label col-4" for="parentCategoryId">Parent Category Number</label>
+      <div class="col-8">
+        <input id="parentCategoryId" type="text" formControlName="parentCategoryId" class="form-control" placeholder="Parent Category Number" />
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary ps-4 pe-4" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
 
 
 <!--<p>category-edit works!</p>-->

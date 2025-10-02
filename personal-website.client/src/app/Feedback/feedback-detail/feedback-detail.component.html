@@ -1,23 +1,25 @@
 <!--<pre>{{ feedback | async | json }}</pre>-->
 
 <!--TODO: Create element to display feedback detail-->
-<div>
-  <h1>{{ (feedback | async)!.feedbackName }}</h1>
-  <p>{{ (feedback | async)!.email }}</p>
-  <p>{{ (feedback | async)!.feedbackComment }}</p>
+<div class="feedback-detail-container container-fluid bg-info text-center col-lg-4 col-md-6 col-sm-12 spacer">
   <div>
-    <label>Need Response?</label>
-    <p *ngIf="((feedback | async)!.neededResponse)">Yes</p>
-    <p *ngIf="(!(feedback | async)!.neededResponse)">No</p>
+    <h1>{{ (feedback | async)!.feedbackName }}</h1>
+    <p>{{ (feedback | async)!.email }}</p>
+    <p>{{ (feedback | async)!.feedbackComment }}</p>
+    <div>
+      <label>Need Response?</label>
+      <p *ngIf="((feedback | async)!.neededResponse)">Yes</p>
+      <p *ngIf="(!(feedback | async)!.neededResponse)">No</p>
+    </div>
+    <div>
+      <label>Resolved?</label>
+      <p *ngIf="((feedback | async)!.isResolved)">Yes</p>
+      <p *ngIf="!((feedback | async)!.isResolved)">No</p>
+    </div>
+    <button class="btn btn-primary" routerLink="../">Back to feedback list</button>
+    <button class="btn btn-success" routerLink="/feedback/edit/{{ (feedback | async)!.id }}">Edit</button>
+    <button class="btn btn-danger" (click)="DeleteFeedback()">Delete</button>
   </div>
-  <div>
-    <label>Resolved?</label>
-    <p *ngIf="((feedback | async)!.isResolved)">Yes</p>
-    <p *ngIf="!((feedback | async)!.isResolved)">No</p>
-  </div>
-  <button routerLink="../">Back to feedback list</button>
-  <button routerLink="/feedback/edit/{{ (feedback | async)!.id }}">Edit</button>
-  <button (click)="DeleteFeedback()">Delete</button>
 </div>
 
 <!--<p>feedback-detail works!</p>-->

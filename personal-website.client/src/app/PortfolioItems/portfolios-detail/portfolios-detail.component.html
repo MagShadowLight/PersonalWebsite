@@ -1,6 +1,6 @@
 <!--<pre>{{ portfolioItem$ | async | json }}</pre>-->
 
-<div class="portfolio container-fluid col-md-6 col-lg-4">
+<div class="portfolio container-fluid col-md-6 col-lg-4 spacer">
   <div class="card text-center bg-info p-4 border-4 border-primary">
     <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}">
     <div class="card-body">
@@ -11,7 +11,7 @@
       <p>{{ (portfolioItem$ | async)!.version }}</p>
       <p>{{ (portfolioItem$ | async)!.category.categoryName }}</p>
       <div>
-        <a class="btn btn-secondary mb-4" href="{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
+        <a class="btn btn-secondary mb-4" href="https://www.{{ (portfolioItem$ | async)!.links }}">View Link<br></a>
       </div>
       <button class="btn btn-primary" routerLink="../">Back to Portfolio List</button>
       <button class="btn btn-success" routerLink="/portfolio/edit/{{ (portfolioItem$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>

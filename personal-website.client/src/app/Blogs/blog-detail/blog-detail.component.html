@@ -2,7 +2,7 @@
 {{ blog$ | async | json }}
 </pre>-->
 
-<div class="container col-md-6 col-lg-4">
+<div class="container col-md-6 col-lg-4 spacer">
   <div class="card text-center bg-info p-4 border-4 border-primary">
     <h1>{{(blog$ | async)!.title }}</h1>
     <p>{{ (blog$ | async)!.body }}</p>

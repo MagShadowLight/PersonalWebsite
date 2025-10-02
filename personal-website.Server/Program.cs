@@ -14,7 +14,8 @@ namespace personal_website.Server
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<personal_websiteServerContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("personal_websiteServerContext") ?? throw new InvalidOperationException("Connection string 'personal_websiteServerContext' not found.")));
+                //options.UseSqlServer(builder.Configuration.GetConnectionString("personal_websiteServerContext") ?? throw new InvalidOperationException("Connection string 'personal_websiteServerContext' not found.")));
+                options.UseSqlite(builder.Configuration.GetConnectionString("personal_websiteServerContext") ?? throw new InvalidOperationException("Connection string 'personal_websiteServerContext' not found.")));
 
             builder.Services.AddDefaultIdentity<PersonalUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<personal_websiteServerContext>();
 

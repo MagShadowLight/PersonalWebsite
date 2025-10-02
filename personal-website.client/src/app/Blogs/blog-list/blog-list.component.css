@@ -1,3 +1,11 @@
 .blogs {
     margin-top: 70px
 }
+
+.bg-info {
+  background-color: #7ffc7f !important;
+}
+
+.spacer {
+  margin-bottom: 500px;
+}

@@ -2,7 +2,7 @@
 
 
 
-<div class="container col-xl-6 col-lg-9 col-md-9 col-sm-12">
+<div class="container col-xl-6 col-lg-9 col-md-9 col-sm-12 spacer">
   <h2 *ngIf="isEditing">Editing Blog</h2>
   <h2 *ngIf="!isEditing">Creating Blog</h2>
   <form class=" bg-info p-4 rounded-3" [formGroup]="blogForm" (ngSubmit)="onSaveButton()">
