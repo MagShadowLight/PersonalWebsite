@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\personal-website.client\personal-website.client.esproj">
+    <!-- <ProjectReference Include="..\personal-website.client\personal-website.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    </ProjectReference> -->
     <ProjectReference Include="..\personal-website.core\personal-website.core.csproj" />
   </ItemGroup>
 
