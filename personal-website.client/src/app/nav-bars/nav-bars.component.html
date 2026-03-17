@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary z-3">
+<nav id="navbar" class="navbar navbar-expand-lg z-3">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">
+    <a class="navbar-brand" routerLink="/login">
       <img src="images/portfolio-icon.png" alt="Bootstrap" width="30" height="30">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,6 +8,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <img src="/images/Sun.png" height="40px" class="me-3 cursor" *ngIf="!darkMode" (click)="EnableDarkMode()">
+            <img src="/images/Moon.png" height="40px" class="me-3 cursor" *ngIf="darkMode" (click)="DisableDarkMode()">
+          </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="/" routerLinkActive="active">Home</a>
           </li>

@@ -5,3 +5,9 @@
 .spacer {
   margin-bottom: 500px;
 }
+
+.image-size {
+  height: 500px;
+  width: 100%;
+  object-fit: contain;
+}

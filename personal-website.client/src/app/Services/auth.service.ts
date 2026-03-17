@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, Observable, of, pipe, tap } from 'rxjs';
 import { UserDto } from '../models/IUserDto';
 import { HttpClient } from '@angular/common/http';
 import { LoginDto } from '../models/ILoginDto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   constructor(private _httpClient: HttpClient) { }
 
   login(credentials: LoginDto): Observable<UserDto> {
-    return this._httpClient.post<UserDto>('/api/Auth/login', credentials).pipe(
+    return this._httpClient.post<UserDto>(`${environment.apiUrl}/api/Auth/login`, credentials).pipe(
       tap((user : any) => {
         //console.log("Logging in")
         this.currentUserBehaviorSubject.next(user);
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    return this._httpClient.post<void>('/api/Auth/logout', {}).pipe(
+    return this._httpClient.post<void>(`${environment.apiUrl}/api/Auth/logout`, {}).pipe(
       tap(() => {
         this.currentUserBehaviorSubject.next(null);
       })
@@ -32,7 +33,7 @@ export class AuthService {
   }
 
   public loadCurrentUser(): Observable<UserDto | null> {
-    return this._httpClient.get<UserDto>('/api/Auth/current').pipe(
+    return this._httpClient.get<UserDto>(`${environment.apiUrl}/api/Auth/current`).pipe(
       tap((user : UserDto) => {
         //console.log("User Loaded")
         //console.log(this.currentUserBehaviorSubject.value)

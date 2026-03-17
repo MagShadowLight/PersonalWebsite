@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
-import { finalize } from 'rxjs';
+import { finalize, from } from 'rxjs';
+import { ThemeService } from '../theme.service';
 
 interface BlogLink {
   id: number;
@@ -17,8 +18,9 @@ interface BlogLink {
 })
 export class NavBarsComponent {
   loggingOutBool = false;
+  darkMode = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private theme: ThemeService) { }
 
   isAuthenticated(): boolean {
     return this.auth.isAuthenticated();
@@ -39,6 +41,16 @@ export class NavBarsComponent {
     }
 
     )
+  }
+
+  EnableDarkMode(): void {
+    this.darkMode = true;
+    this.theme.enableDarkMode();
+  }
+
+  DisableDarkMode(): void {
+    this.darkMode = false;
+    this.theme.disableDarkMode();
   }
 
 }

@@ -1,0 +1,42 @@
+services:
+
+  api:
+    image: my-website
+    build: 
+      context: .
+      dockerfile: ./personal-website.Server/dockerfile
+    container_name: my-website-api
+    ports:
+     - "5126:4200"
+    networks:
+      - backend
+    volumes:
+      - sqlite:/app/Database
+
+  frontend:
+    image: my-website-client
+    build: 
+      context: ./personal-website.client
+      dockerfile: ./Dockerfile
+    container_name: my-website-frontend
+    ports:
+      - "4200:443"
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - api
+
+volumes:
+  sqlite:
+    name: sqlite
+    driver: local
+    driver_opts:
+      type: none
+      device: './personal-website.Server/Database/'
+      o: bind
+    
+
+networks:
+  backend:
+  frontend:

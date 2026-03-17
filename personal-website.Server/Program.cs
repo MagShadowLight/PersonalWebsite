@@ -21,6 +21,22 @@ namespace personal_website.Server
 
             // Add services to the container.
 
+            // Add CORS Policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy
+                        // .AllowAnyOrigin()
+                        .WithOrigins("https://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+
+                    policy.WithOrigins("https://my-website-frontend");
+                });
+            });
+
             // Add ignore cycle
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -43,6 +59,8 @@ namespace personal_website.Server
 
             var app = builder.Build();
 
+            // Enable CORS middleware
+            app.UseCors();
             app.UseDefaultFiles();
             app.UseStaticFiles();
             var imagepath = Path.Combine(AppContext.BaseDirectory, "Images");

@@ -20,7 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.0" />
   </ItemGroup>
 
@@ -28,7 +28,6 @@
     <!-- <ProjectReference Include="..\personal-website.client\personal-website.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference> -->
-    <ProjectReference Include="..\personal-website.client\personal-website.client.esproj" />
     <ProjectReference Include="..\personal-website.core\personal-website.core.csproj" />
   </ItemGroup>
 

@@ -13,3 +13,19 @@
 .btn-primary:active {
     background-color: gray;
 }
+
+.images-size {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  position: relative;
+}
+
+.image-text {
+  position: absolute;
+  background-color: white;
+  color: black;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+}

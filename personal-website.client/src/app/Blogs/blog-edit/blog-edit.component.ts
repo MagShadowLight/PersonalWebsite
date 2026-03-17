@@ -28,6 +28,12 @@ export class BlogEditComponent implements OnInit, OnDestroy {
           parentCategoryId: 0,
           postedBlog: [],
           postedItem: []
+      },
+      blogsScreenshotId: 0,
+      blogsScreenshot: {
+        blogsScreenshotId: 0,
+        path: '',
+        description: ''
       }
   }
   //category: Category = {
@@ -109,6 +115,12 @@ export class BlogEditComponent implements OnInit, OnDestroy {
         parentCategoryId: [0],
         PostedBlogs: [],
         PostedItems: []
+      }),
+      blogScreenshotId: [0],
+      blogScreenshot: this.formBuilder.group({
+        blogScreenshotId:[0],
+        path: [' '],
+        description: [' ']
       })
     });
   }
@@ -135,7 +147,9 @@ export class BlogEditComponent implements OnInit, OnDestroy {
         updatedDate: this.blogForm.value.updatedDate,
         visibility: this.blogForm.value.visibility,
         categoryId: Number(this.blogForm.value.categoryId),
-        category: this.blogForm.value.category
+        category: this.blogForm.value.category,
+        blogsScreenshotId: Number(this.blogForm.value.blogScreenshotId),
+        blogsScreenshot: this.blogForm.value.blogScreenshot
     }
 
 

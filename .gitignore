@@ -366,3 +366,12 @@ FodyWeavers.xsd
 *.db
 *.db-shm
 *.db-wal
+
+# Script files
+docker-image-builder.sh
+
+# Docker files
+# docker-compose.yml
+
+# Visual Studio Code Cache
+.vscode/

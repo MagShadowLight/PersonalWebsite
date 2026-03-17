@@ -2,7 +2,48 @@
 {{ blog$ | async | json }}
 </pre>-->
 
-<div class="container col-md-6 col-lg-4 spacer">
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-12">
+      <img src="{{(blog$ | async )!.blogsScreenshot.path}}" alt="{{(blog$ | async)!.blogsScreenshot.description}}" class="image-size">
+    </div>
+  </div>
+</div>
+<div class="container p-2 border-4 border-primary mb-3">
+  <div class="row row-cols-md-2 row-cols-1">
+    <div class="col col-xl-10 col-md-10 col-sm-10">
+      <div class="card text-center bg-info p-4 border-4 border-primary">
+        <h1>{{(blog$ | async)!.title }}</h1>
+        <div class="row mt-3 mb-3">
+          <div class="col-4">Posted on: {{ (blog$ | async)!.createdDate | date:'mediumDate'}}</div>
+          <div class="col-4">Updated on: {{ (blog$ | async)!.updatedDate | date:'mediumDate' }}</div>
+          <div class="col-4">Category: {{ (blog$ | async)!.category.categoryName }}</div>
+        </div>
+        <div>
+          {{ (blog$ | async)!.body.toString() }}
+        </div>
+        <div>
+          <button class="btn btn-primary" routerLink="../">Back to Blog List</button>
+          <button class="btn btn-success" routerLink="/blog/edit/{{ (blog$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
+          <button class="btn btn-danger" (click)="DeletePost()" *ngIf="isAuthenticated()">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-2">
+      <div class="bg-info card text-center border-4 border-primary" *ngFor="let blogItems of (blogs$ | async)">
+        <div class="card-body">
+          <h4>{{ blogItems.title }}</h4>
+          <p>{{ blogItems.createdDate | date:'mediumDate' }}</p>
+          <p>{{ blogItems.updatedDate | date:'mediumDate' }}</p>
+          <p>{{ blogItems.category.categoryName  }}</p>
+          <button class="btn btn-primary" routerLink="../{{ blogItems.id }}">View {{ blogItems.displayName }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container col-md-6 col-lg-4 spacer">
   <div class="card text-center bg-info p-4 border-4 border-primary">
     <h1>{{(blog$ | async)!.title }}</h1>
     <p>{{ (blog$ | async)!.body }}</p>
@@ -15,6 +56,6 @@
       <button class="btn btn-danger" (click)="DeletePost()" *ngIf="isAuthenticated()">Delete</button>
     </div>
   </div>
-</div>
+</div> -->
 
 <!--<p>blog-detail works!</p>-->

@@ -2,7 +2,7 @@
   {{ blogs$ | async | json}}
 </pre>-->
 <div class="blogs container-fluid row">
-  <div class="bg-info card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" *ngFor="let blogItems of (blogs$ | async)">
+  <div class="card-bg card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" *ngFor="let blogItems of (blogs$ | async)">
     <div class="card-body">
       <h4>{{ blogItems.title }}</h4>
       <p>{{ blogItems.createdDate | date:'mediumDate' }}</p>

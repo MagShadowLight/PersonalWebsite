@@ -15,6 +15,9 @@ namespace personal_website.Server.Models
         public int? CategoryId { get; set; }
 
         public virtual Categories? Category { get; set; }
+        [ForeignKey(nameof(BlogsScreenshot.BlogsScreenshotId))]
+        public int BlogsScreenshotId { get; set; }
+        public BlogsScreenshot BlogsScreenshot { get; set; }
 
     }
 }

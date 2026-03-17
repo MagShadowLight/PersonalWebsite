@@ -2,11 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "edge",
+      "type": "chrome",
       "request": "launch",
-      "name": "localhost (Edge)",
+      "name": "localhost (Brave)",
       "url": "https://localhost:4200",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "/usr/bin/brave"
     },
     {
       "type": "chrome",

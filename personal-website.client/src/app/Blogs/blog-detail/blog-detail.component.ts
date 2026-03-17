@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Blogs } from '../../models/IBlogs';
 import { AuthService } from '../../Services/auth.service';
+import { Category } from '../../models/ICategory';
 
 @Component({
   selector: 'app-blog-detail',
@@ -15,6 +16,10 @@ export class BlogDetailComponent implements OnInit{
 
   id: number = 0;
   blog$: BehaviorSubject<Blogs>;
+  blogs$: BehaviorSubject<Blogs[]>;
+  categories$: BehaviorSubject<Category[]>;
+
+
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService ) {
     //  this.id = 0;
     //this.blog = {
@@ -32,6 +37,8 @@ export class BlogDetailComponent implements OnInit{
     //    parentCategoryId: null
     //  }
     //};
+    this.blogs$ = this.data.blogs$;
+    this.categories$ = this.data.categories$
     this.blog$ = this.data.blog$;
   }
   ngOnInit(): void {
@@ -39,6 +46,8 @@ export class BlogDetailComponent implements OnInit{
       this.id = +params.get('id')!;
       this.data.getBlogsbyId(this.id);
     });
+    this.data.getAllBlogs();
+    this.data.getAllCategories();
   }
 
   DeletePost() {

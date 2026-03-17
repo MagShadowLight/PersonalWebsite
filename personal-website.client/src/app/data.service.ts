@@ -6,12 +6,12 @@ import { Category } from './models/ICategory';
 import { PortfolioItems } from './models/IPortfolioItems';
 import { PortfolioItemImages } from './models/IPortfolioItemImages';
 import { Feedback } from './models/IFeedback';
+import { environment } from '../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   blogs$: BehaviorSubject<Blogs[]> = new BehaviorSubject<Blogs[]>([]);
   blog$: BehaviorSubject<Blogs> = new BehaviorSubject<Blogs>({
     id: 0,
@@ -28,6 +28,12 @@ export class DataService {
         parentCategoryId: null,
         postedBlog: [],
         postedItem: []
+    },
+    blogsScreenshotId: 0,
+    blogsScreenshot: {
+      blogsScreenshotId: 0,
+      path: '',
+      description: ''
     }
   });
   portfolioItems$: BehaviorSubject<PortfolioItems[]> = new BehaviorSubject<PortfolioItems[]>([]);
@@ -124,122 +130,244 @@ export class DataService {
   }
 
   getAllBlogs() {
-    this._http.get<Blogs[]>('/api/blogs').subscribe((data : any) => {
+    this._http.get<Blogs[]>(`${environment.apiUrl}/api/blogs`).subscribe((data : any) => {
       this.blogs$.next(data);
     });
   }
 
   getBlogsbyId(id: number) {
-    this._http.get<Blogs>(`/api/blogs/${id}`).subscribe((data : any) => {
+    this._http.get<Blogs>(`${environment.apiUrl}/api/blogs/${id}`).subscribe((data : any) => {
       this.blog$.next(data);
     });
   }
 
   getBlogInfoById(id: number): Observable<Blogs> {
-    return this._http.get<Blogs>(`/api/blogs/${id}`).pipe(
+    return this._http.get<Blogs>(`${environment.apiUrl}/api/blogs/${id}`).pipe(
       tap((data : any) => this.blog$.next(data))
     );
   }
 
   createBlog(blog: Blogs): Observable<Blogs> {
-    return this._http.post<Blogs>('/api/blogs/', blog);
+    return this._http.post<Blogs>(`${environment.apiUrl}/api/blogs/`, blog);
   }
 
   updateBlog(id: number, blog: Blogs): Observable<Blogs> {
-    return this._http.put<Blogs>(`/api/blogs/${id}`, blog);
+    return this._http.put<Blogs>(`${environment.apiUrl}/api/blogs/${id}`, blog);
   }
 
   deleteBlog(id: number): Observable<any> {
-    return this._http.delete<any>('/api/blogs/' + id);
+    return this._http.delete<any>(`${environment.apiUrl}/api/blogs/` + id);
   }
 
   getAllPortfolioItems(): void {
-    this._http.get<PortfolioItems[]>('/api/PortfolioItems').subscribe((data : any) => {
+    this._http.get<PortfolioItems[]>(`${environment.apiUrl}/api/PortfolioItems`).subscribe((data : any) => {
       this.portfolioItems$.next(data);
     });
   }
 
   getPortfolioItemById(id: number) {
-    this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe((data : any) => {
+    this._http.get<PortfolioItems>(`${environment.apiUrl}/api/PortfolioItems/${id}`).subscribe((data : any) => {
       this.portfolioItem$.next(data);
     });
   }
 
   getItemInfoById(id: number): Observable<PortfolioItems> {
-    return this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).pipe(
+    return this._http.get<PortfolioItems>(`${environment.apiUrl}/api/PortfolioItems/${id}`).pipe(
       tap((data : any) => this.portfolioItem$.next(data))
     );
   }
 
   createItem(item: PortfolioItems): Observable<PortfolioItems> {
-    return this._http.post<PortfolioItems>('/api/PortfolioItems/', item);
+    return this._http.post<PortfolioItems>(`${environment.apiUrl}/api/PortfolioItems/`, item);
   }
 
   updateItem(id: number, item: PortfolioItems): Observable<PortfolioItems> {
-    return this._http.put<PortfolioItems>(`/api/PortfolioItems/${id}`, item);
+    return this._http.put<PortfolioItems>(`${environment.apiUrl}/api/PortfolioItems/${id}`, item);
   }
 
   deleteItem(id: number): Observable<any> {
-    return this._http.delete<any>('/api/PortfolioItems/' + id);
+    return this._http.delete<any>(`${environment.apiUrl}/api/PortfolioItems/` + id);
   }
 
   getAllCategories(): void {
-    this._http.get<Category[]>('/api/Categories').subscribe((data : any) => {
+    this._http.get<Category[]>(`${environment.apiUrl}/api/Categories`).subscribe((data : any) => {
       this.categories$.next(data);
     })
   }
 
   getCategoryById(id: number) {
-    this._http.get<Category>(`/api/Categories/${id}`).subscribe((data : any) => {
+    this._http.get<Category>(`${environment.apiUrl}/api/Categories/${id}`).subscribe((data : any) => {
       this.category$.next(data);
     })
   }
 
   getCategoryInfoById(id: number): Observable<Category> {
-    return this._http.get<Category>(`/api/Categories/${id}`).pipe(
+    return this._http.get<Category>(`${environment.apiUrl}/api/Categories/${id}`).pipe(
       tap((data : any) => this.category$.next(data))
     );
   }
 
   CreateCategory(category: Category): Observable<Category> {
-    return this._http.post<Category>('/api/Categories/', category);
+    return this._http.post<Category>(`${environment.apiUrl}/api/Categories/`, category);
   }
 
   UpdateCategory(id: number, category: Category): Observable<Category> {
-    return this._http.put<Category>(`/api/Categories/${id}`, category);
+    return this._http.put<Category>(`${environment.apiUrl}/api/Categories/${id}`, category);
   }
 
   DeleteCategory(id: number): Observable<any> {
-    return this._http.delete<any>(`/api/Categories/${id}`);
+    return this._http.delete<any>(`${environment.apiUrl}/api/Categories/${id}`);
   }
 
   GetAllFeedback(): void {
-    this._http.get<Feedback[]>('/api/Feedbacks').subscribe((data : any) => {
+    this._http.get<Feedback[]>(`${environment.apiUrl}/api/Feedbacks`).subscribe((data : any) => {
       this.feedbacks$.next(data);
     });
   }
 
   GetFeedbackById(id: number): void {
-    this._http.get<Feedback>(`/api/Feedbacks/${id}`).subscribe((data : any) => {
+    this._http.get<Feedback>(`${environment.apiUrl}/api/Feedbacks/${id}`).subscribe((data : any) => {
       this.feedback$.next(data);
     });
   }
 
   GetFeedbackInfoById(id: number): Observable<Feedback> {
-    return this._http.get<Feedback>(`/api/Feedbacks/${id}`).pipe(
+    return this._http.get<Feedback>(`${environment.apiUrl}/api/Feedbacks/${id}`).pipe(
       tap((data : any) => this.feedback$.next(data))
     );
   }
 
   CreateFeedback(feedback: Feedback): Observable<Feedback> {
-    return this._http.post<Feedback>('/api/Feedbacks', feedback);
+    return this._http.post<Feedback>(`${environment.apiUrl}/api/Feedbacks`, feedback);
   }
 
   UpdateFeedback(id: number, feedback: Feedback) {
-    return this._http.put<Feedback>(`/api/Feedbacks/${id}`, feedback);
+    return this._http.put<Feedback>(`${environment.apiUrl}/api/Feedbacks/${id}`, feedback);
   }
 
   DeleteFeedback(id: number) : Observable<any> {
-    return this._http.delete<any>(`/api/Feedbacks/${id}`);
+    return this._http.delete<any>(`${environment.apiUrl}/api/Feedbacks/${id}`);
   }
+
+  // localhost
+
+  // getAllBlogs() {
+  //   this._http.get<Blogs[]>('/api/blogs').subscribe((data : any) => {
+  //     this.blogs$.next(data);
+  //   });
+  // }
+
+  // getBlogsbyId(id: number) {
+  //   this._http.get<Blogs>(`/api/blogs/${id}`).subscribe((data : any) => {
+  //     this.blog$.next(data);
+  //   });
+  // }
+
+  // getBlogInfoById(id: number): Observable<Blogs> {
+  //   return this._http.get<Blogs>(`/api/blogs/${id}`).pipe(
+  //     tap((data : any) => this.blog$.next(data))
+  //   );
+  // }
+
+  // createBlog(blog: Blogs): Observable<Blogs> {
+  //   return this._http.post<Blogs>('/api/blogs/', blog);
+  // }
+
+  // updateBlog(id: number, blog: Blogs): Observable<Blogs> {
+  //   return this._http.put<Blogs>(`/api/blogs/${id}`, blog);
+  // }
+
+  // deleteBlog(id: number): Observable<any> {
+  //   return this._http.delete<any>('/api/blogs/' + id);
+  // }
+
+  // getAllPortfolioItems(): void {
+  //   this._http.get<PortfolioItems[]>('/api/PortfolioItems').subscribe((data : any) => {
+  //     this.portfolioItems$.next(data);
+  //   });
+  // }
+
+  // getPortfolioItemById(id: number) {
+  //   this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).subscribe((data : any) => {
+  //     this.portfolioItem$.next(data);
+  //   });
+  // }
+
+  // getItemInfoById(id: number): Observable<PortfolioItems> {
+  //   return this._http.get<PortfolioItems>(`/api/PortfolioItems/${id}`).pipe(
+  //     tap((data : any) => this.portfolioItem$.next(data))
+  //   );
+  // }
+
+  // createItem(item: PortfolioItems): Observable<PortfolioItems> {
+  //   return this._http.post<PortfolioItems>('/api/PortfolioItems/', item);
+  // }
+
+  // updateItem(id: number, item: PortfolioItems): Observable<PortfolioItems> {
+  //   return this._http.put<PortfolioItems>(`/api/PortfolioItems/${id}`, item);
+  // }
+
+  // deleteItem(id: number): Observable<any> {
+  //   return this._http.delete<any>('/api/PortfolioItems/' + id);
+  // }
+
+  // getAllCategories(): void {
+  //   this._http.get<Category[]>('/api/Categories').subscribe((data : any) => {
+  //     this.categories$.next(data);
+  //   })
+  // }
+
+  // getCategoryById(id: number) {
+  //   this._http.get<Category>(`/api/Categories/${id}`).subscribe((data : any) => {
+  //     this.category$.next(data);
+  //   })
+  // }
+
+  // getCategoryInfoById(id: number): Observable<Category> {
+  //   return this._http.get<Category>(`/api/Categories/${id}`).pipe(
+  //     tap((data : any) => this.category$.next(data))
+  //   );
+  // }
+
+  // CreateCategory(category: Category): Observable<Category> {
+  //   return this._http.post<Category>('/api/Categories/', category);
+  // }
+
+  // UpdateCategory(id: number, category: Category): Observable<Category> {
+  //   return this._http.put<Category>(`/api/Categories/${id}`, category);
+  // }
+
+  // DeleteCategory(id: number): Observable<any> {
+  //   return this._http.delete<any>(`/api/Categories/${id}`);
+  // }
+
+  // GetAllFeedback(): void {
+  //   this._http.get<Feedback[]>('/api/Feedbacks').subscribe((data : any) => {
+  //     this.feedbacks$.next(data);
+  //   });
+  // }
+
+  // GetFeedbackById(id: number): void {
+  //   this._http.get<Feedback>(`/api/Feedbacks/${id}`).subscribe((data : any) => {
+  //     this.feedback$.next(data);
+  //   });
+  // }
+
+  // GetFeedbackInfoById(id: number): Observable<Feedback> {
+  //   return this._http.get<Feedback>(`/api/Feedbacks/${id}`).pipe(
+  //     tap((data : any) => this.feedback$.next(data))
+  //   );
+  // }
+
+  // CreateFeedback(feedback: Feedback): Observable<Feedback> {
+  //   return this._http.post<Feedback>('/api/Feedbacks', feedback);
+  // }
+
+  // UpdateFeedback(id: number, feedback: Feedback) {
+  //   return this._http.put<Feedback>(`/api/Feedbacks/${id}`, feedback);
+  // }
+
+  // DeleteFeedback(id: number) : Observable<any> {
+  //   return this._http.delete<any>(`/api/Feedbacks/${id}`);
+  // }
 }

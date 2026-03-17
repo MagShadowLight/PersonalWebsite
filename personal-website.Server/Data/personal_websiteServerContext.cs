@@ -69,6 +69,40 @@ namespace personal_website.Server.Data
 
             // Add Seed Data
 
+            // BlogsScreenshot
+            modelBuilder.Entity<BlogsScreenshot>().HasData(
+                    new BlogsScreenshot
+                    {
+                        BlogsScreenshotId = 1,
+                        Path = Path.Combine("images","cat.png"),
+                        Description = "Cat",
+                        Blogs =
+                        {
+
+                        }
+                    },
+                    new BlogsScreenshot
+                    {
+                        BlogsScreenshotId = 2,
+                        Path = Path.Combine("images", "taco.png"),
+                        Description = "Taco",
+                        Blogs =
+                        {
+
+                        }
+                    },
+                    new BlogsScreenshot
+                    {
+                        BlogsScreenshotId = 3,
+                        Path = Path.Combine("images", "loremispum.png"),
+                        Description = "Lorem Ispum",
+                        Blogs =
+                        {
+
+                        }
+                    }
+                );
+
             // Blogs
             modelBuilder.Entity<Blogs>().HasData(
                     new Blogs
@@ -84,6 +118,11 @@ namespace personal_website.Server.Data
                         Category =
                         {
                             
+                        },
+                        BlogsScreenshotId = 1,
+                        BlogsScreenshot =
+                        {
+
                         }
                     },
                     new Blogs
@@ -99,6 +138,31 @@ namespace personal_website.Server.Data
                         Category =
                         {
                             
+                        },
+                        BlogsScreenshotId = 2,
+                        BlogsScreenshot =
+                        {
+
+                        }
+                    },
+                    new Blogs
+                    {
+                        Id = 3,
+                        DisplayName = "Lorem Ispum",
+                        Title = "Lorem Ispum",
+                        Body = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.\r\n\r\nLorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
+                        CreatedDate = new DateTime(),
+                        UpdatedDate = new DateTime(),
+                        CategoryId = 1,
+                        Visibility = Visibility.Visible,
+                        Category =
+                        {
+
+                        },
+                        BlogsScreenshotId = 3,
+                        BlogsScreenshot =
+                        {
+
                         }
                     }
                 );
@@ -291,17 +355,23 @@ namespace personal_website.Server.Data
                 .WithOne(i => i.Image)
                 .HasForeignKey<PortfolioItems>(i => i.ImageID)
                 .IsRequired(false);
-                
+
+            modelBuilder.Entity<Blogs>()
+                .HasOne(i => i.BlogsScreenshot)
+                .WithOne(i => i.Blogs)
+                .HasForeignKey<Blogs>(i => i.BlogsScreenshotId)
+                .IsRequired(false);
 
             modelBuilder.Entity<Blogs>().Navigation(c => c.Category).AutoInclude();
             modelBuilder.Entity<Categories>().Navigation(c => c.PostedBlogs).AutoInclude();
             modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Category).AutoInclude();
             modelBuilder.Entity<Categories>().Navigation(c => c.PostedItems).AutoInclude();
             modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Image).AutoInclude();
+            modelBuilder.Entity<Blogs>().Navigation(c => c.BlogsScreenshot).AutoInclude();
 
             //modelBuilder.Entity<Categories>().Property(b => b.Id)
             //    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
-            
+
         }
 
 
@@ -311,5 +381,6 @@ namespace personal_website.Server.Data
         public DbSet<personal_website.Server.Models.Blogs> Blogs { get; set; } = default!;
         public DbSet<personal_website.Server.Models.Feedback> Feedback { get; set; } = default!;
         public DbSet<personal_website.Server.Models.Categories> Categories { get; set; } = default!;
+        public DbSet<personal_website.Server.Models.BlogsScreenshot> BlogsScreenshot { get; set; } = default!;
     }
 }

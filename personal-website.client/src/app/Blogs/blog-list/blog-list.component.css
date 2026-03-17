@@ -1,11 +1,11 @@
 .blogs {
-    margin-top: 70px
-}
-
-.bg-info {
-  background-color: #7ffc7f !important;
+    margin-top: 70px;
 }
 
 .spacer {
   margin-bottom: 500px;
+}
+
+.card-bg {
+  background-color: var(--bs-card-bg) !important;
 }

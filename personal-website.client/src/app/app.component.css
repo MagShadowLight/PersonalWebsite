@@ -1,3 +1,5 @@
+@import '../styles.css';
+
 :host {
     max-width: 1280px;
     padding: 2rem;
@@ -17,6 +19,18 @@ table {
     position: relative;
     min-height: 100vh;
     padding-bottom: 70px;
+    /* background-color: black; */
+}
+
+.dark-mode {
+    --primary-bg-color: black !important;
+}
+.light-mode {
+    --primary-bg-color: white !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-bg-color) !important;
 }
 
 

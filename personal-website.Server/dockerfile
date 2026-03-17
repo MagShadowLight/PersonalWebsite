@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ./personal-website.sln .
+COPY ./personal-website.Server/*.csproj ./personal-website.Server/
+COPY ./personal-website.core/*.csproj ./personal-website.core/
+RUN dotnet restore ./personal-website.Server/personal-website.Server.csproj
+
+COPY ./personal-website.Server/. /src/personal-website.Server/
+COPY ./personal-website.core/. /src/personal-website.core/
+WORKDIR /src/personal-website.Server
+RUN dotnet publish personal-website.Server.csproj -c Release -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+COPY ./personal-website.Server/cert/aspnetapp.pfx /root/.dotnet/corefx/cryptography/x509stores/my/
+COPY --from=build /app ./
+
+ENV ASPNETCore_URLS=https://+:4200
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ConnectionStrings__DefaultConnection=Data Source=/app/Database/Portfolio.db
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=Testtest
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.dotnet/corefx/cryptography/x509stores/my/aspnetapp.pfx
+
+EXPOSE 4200
+ENTRYPOINT [ "dotnet", "personal-website.Server.dll" ]
