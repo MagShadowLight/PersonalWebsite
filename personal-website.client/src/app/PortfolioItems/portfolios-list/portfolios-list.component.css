@@ -9,3 +9,11 @@
 .spacer {
   margin-bottom: 500px;
 }
+
+#portfolio-card-body {
+  cursor: pointer;
+}
+
+#card-text{
+  color: black;
+}

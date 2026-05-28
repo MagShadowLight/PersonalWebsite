@@ -13,15 +13,18 @@ import { DataService } from '../../data.service';
 export class FeedbackDetailComponent implements OnInit {
   id: number = 0;
   feedback: BehaviorSubject<Feedback>;
+  feedbacks: BehaviorSubject<Feedback[]>;
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router) {
     this.feedback = this.data.feedback$;
+    this.feedbacks = this.data.feedbacks$;
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.GetFeedbackById(this.id);
+      this.data.GetAllFeedback();
     });
   }
 

@@ -45,8 +45,8 @@ Thumbs.db
 /cert
 
 # docker files
-# Dockerfile
-# .dockerignore
+Dockerfile
+.dockerignore
 
 # nginx configuration
-# nginx.conf
+nginx.conf

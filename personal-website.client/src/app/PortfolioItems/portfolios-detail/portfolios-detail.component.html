@@ -1,8 +1,53 @@
 <!--<pre>{{ portfolioItem$ | async | json }}</pre>-->
 
-<div class="portfolio container-fluid col-md-6 col-lg-4 spacer">
+
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-12">
+      <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}" class="image-size">
+    </div>
+  </div>
+</div>
+<div class="container p-2 mb-3">
+  <div class="row row-cols-md-2 row-cols-1">
+    <div class="col col-xl-10 col-md-10 col-sm-10">
+      <div class="card text-center p-4 border-4 border-primary" id="portfolio-card-body">
+        <h1 id="card-text">{{(portfolioItem$ | async)!.title }}</h1>
+        <div class="row mt-3 mb-3">
+          <div id="card-text" class="col-4">Created at: {{ (portfolioItem$ | async)!.creationDate | date:'mediumDate'}}</div>
+          <div id="card-text" class="col-4">Modified at: {{ (portfolioItem$ | async)!.updatedDate | date:'mediumDate' }}</div>
+          <div id="card-text" class="col-4">Category: {{ (portfolioItem$ | async)!.category.categoryName }}</div>
+        </div>
+        <div id="card-text">
+          Version: {{ (portfolioItem$ | async)!.version }}
+        </div>
+        <div id="card-text">
+          {{ (portfolioItem$ | async)!.description }}
+        </div>
+        <div>
+          <button class="btn btn-primary" routerLink="../">Back to Portfolio</button>
+          <button class="btn btn-success" routerLink="/portfolio/edit/{{ (portfolioItem$ | async)!.id }}" *ngIf="isAuthenticated()">Edit</button>
+          <button class="btn btn-danger" (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-2">
+      <div class="card text-center border-4 border-primary" id="portfolio-card-body" *ngFor="let portfolioItem of (portfolioItems$ | async)">
+        <div class="card-body" id="portfolio-card" routerLink="../{{ portfolioItem.id }}">
+          <img src="{{ portfolioItem.image.path }}" height="100" width="100" id="image-card">
+          <h4 id="card-text">{{ portfolioItem.title }}</h4>
+          <p id="card-text">{{ portfolioItem.updatedDate | date:'mediumDate' }}</p>
+          <p id="card-text">{{ portfolioItem.version }}</p>
+          <p id="card-text">{{ portfolioItem.category.categoryName  }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="portfolio container-fluid col-md-6 col-lg-4 spacer">
   <div class="card text-center bg-info p-4 border-4 border-primary">
-    <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}">
     <div class="card-body">
       <h1>{{(portfolioItem$ | async)!.title }}</h1>
       <p>{{ (portfolioItem$ | async)!.description }}</p>
@@ -18,7 +63,7 @@
       <button class="btn btn-danger" (click)="DeleteItem()" *ngIf="isAuthenticated()">Delete</button>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

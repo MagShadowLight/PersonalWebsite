@@ -6,10 +6,6 @@
   margin-top: 70px;
 }
 
-.btn-primary {
-    background-color: black;
-}
-
 .btn-primary:active {
     background-color: gray;
 }
@@ -28,4 +24,25 @@
   top: 25%;
   left: 25%;
   right: 25%;
+}
+
+#blog-card {
+  background-color: rgb(103, 225, 103);
+}
+
+#portfolio-card {
+  background-color: rgb(103, 225, 103);
+}
+
+#main-text {
+  color: black;
+}
+
+#feedback-form {
+  background-color: rgb(103, 225, 103);
+}
+
+#about-button {
+  background-color: black;
+  color: white;
 }

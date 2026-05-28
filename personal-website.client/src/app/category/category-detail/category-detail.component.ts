@@ -13,15 +13,18 @@ import { DataService } from '../../data.service';
 export class CategoryDetailComponent implements OnInit{
   id: number = 0;
   category: BehaviorSubject<Category>;
+  categories: BehaviorSubject<Category[]>;
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router) {
     this.category = this.data.category$;
+    this.categories = this.data.categories$;
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params : any) => {
       this.id = +params.get('id')!;
       this.data.getCategoryById(this.id);
+      this.data.getAllCategories();
     });
   }
 

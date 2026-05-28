@@ -9,3 +9,20 @@
 .card-bg {
   background-color: var(--bs-card-bg) !important;
 }
+
+#blog-card{
+  font-family: "Pixelify Sans", Arial;
+  background-color: rgb(103, 225, 103);
+}
+
+#card-text{
+  color: black;
+}
+
+#blog-card-body {
+  cursor: pointer;
+}
+
+#image-card{
+  object-fit: cover;
+}

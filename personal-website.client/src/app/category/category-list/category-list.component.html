@@ -2,10 +2,9 @@
 
 <!--TODO: Create the element to display-->
 <div class="category-container container-fluid row">
-  <div class="card col-lg-4 col-md-6 col-sm-12 text-center bg-info border-3 border-primary mb-2" *ngFor="let categoryItem of (categories | async)">
-    <div class="card-body">
+  <div class="card col-lg-4 col-md-6 col-sm-12 text-center border-3 border-primary mb-2" id="category-card" *ngFor="let categoryItem of (categories | async)">
+    <div class="card-body" routerLink="{{ categoryItem.id }}">
       <h2>{{ categoryItem.categoryName }}</h2>
-      <button class="btn btn-primary" routerLink="{{ categoryItem.id }}">View {{ categoryItem.categoryName }}</button>
     </div>
   </div>
 </div>

@@ -5,3 +5,18 @@
 .spacer {
   margin-bottom: 500px;
 }
+#category-card{
+  cursor: pointer;
+}
+
+#category-card-body {
+  background-color: rgb(103, 225, 103);
+}
+
+#card-text{
+  color: black;
+}
+
+.mt-5 {
+  margin-top: 75px !important;
+}

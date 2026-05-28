@@ -1,3 +1,7 @@
-.bg-primary {
-  background-color: #33ff55 !important;
+#feedback-form {
+  background-color: rgb(103, 225, 103);
+}
+
+#label-text {
+  color: black;
 }

@@ -1,25 +1,42 @@
 <!--<pre>{{ feedback | async | json }}</pre>-->
-
-<!--TODO: Create element to display feedback detail-->
-<div class="feedback-detail-container container-fluid bg-info text-center col-lg-4 col-md-6 col-sm-12 spacer">
-  <div>
-    <h1>{{ (feedback | async)!.feedbackName }}</h1>
-    <p>{{ (feedback | async)!.email }}</p>
-    <p>{{ (feedback | async)!.feedbackComment }}</p>
-    <div>
-      <label>Need Response?</label>
-      <p *ngIf="((feedback | async)!.neededResponse)">Yes</p>
-      <p *ngIf="(!(feedback | async)!.neededResponse)">No</p>
+<div class="container mt-5 p-2 mb-3">
+  <div class="row row-cols-md-2 row-cols-1">
+    <div class="col col-xl-10 col-md-10 col-sm-10">
+      <div class="card text-center p-4 border-4 border-primary" id="feedback-card-body">
+        <h1 id="card-text">{{ (feedback | async)!.feedbackName }}</h1>
+        <div class="row mt-3 mb-3">
+          <p id="card-text">Email: {{ (feedback | async)!.email }}</p>
+          <div id="card-text">
+            <label>Need Response?</label>
+            <p *ngIf="((feedback | async)!.neededResponse)">Yes</p>
+            <p *ngIf="(!(feedback | async)!.neededResponse)">No</p>
+          </div>
+          <div id="card-text">
+            <label>Resolved?</label>
+            <p *ngIf="((feedback | async)!.isResolved)">Yes</p>
+            <p *ngIf="!((feedback | async)!.isResolved)">No</p>
+          </div>
+        </div>
+        <p id="card-text">{{ (feedback | async)!.feedbackComment }}</p>
+        <div>
+          <button class="btn btn-primary" routerLink="../">Back to feedback list</button>
+          <button class="btn btn-success" routerLink="/feedback/edit/{{ (feedback | async)!.id }}">Edit</button>
+          <button class="btn btn-danger" (click)="DeleteFeedback()">Delete</button>
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Resolved?</label>
-      <p *ngIf="((feedback | async)!.isResolved)">Yes</p>
-      <p *ngIf="!((feedback | async)!.isResolved)">No</p>
+    <div class="col col-lg-2">
+      <div class="card text-center border-4 border-primary" id="feedback-card-body" *ngFor="let feedbackItem of ( feedbacks | async)">
+        <div class="card-body" id="feedback-card" routerLink="../{{ feedbackItem.id }}">
+          <h4 id="card-text">{{ feedbackItem.feedbackName }}</h4>
+          <p id="card-text">{{feedbackItem.email}}</p>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-primary" routerLink="../">Back to feedback list</button>
-    <button class="btn btn-success" routerLink="/feedback/edit/{{ (feedback | async)!.id }}">Edit</button>
-    <button class="btn btn-danger" (click)="DeleteFeedback()">Delete</button>
   </div>
 </div>
+
+
+<!--TODO: Create element to display feedback detail-->
 
 <!--<p>feedback-detail works!</p>-->

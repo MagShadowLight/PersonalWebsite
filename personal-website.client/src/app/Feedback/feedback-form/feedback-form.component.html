@@ -1,21 +1,21 @@
 <!--<pre>{{ feedback | json }}</pre>-->
 
 <!--TODO: Create form to create feedback-->
-<form class="container bg-primary p-4" [formGroup]="feedbackForm" (ngSubmit)="onSave()">
+<form class="container p-4" [formGroup]="feedbackForm" (ngSubmit)="onSave()" id="feedback-form">
   <div>
-    <label for="feedbackName" class="form-label">Title</label>
+    <label for="feedbackName" class="form-label" id="label-text">Title</label>
     <input id="feedbackName" type="text" formControlName="feedbackName" class="form-control" placeholder="Title"/>
   </div>
   <div>
-    <label for="email" class="form-label">Email</label>
+    <label for="email" class="form-label" id="label-text">Email</label>
     <input id="email" type="text" formControlName="email" class="form-control" placeholder="Email"/>
   </div>
   <div>
-    <label for="comment" class="form-label">Comment</label>
+    <label for="comment" class="form-label" id="label-text">Comment</label>
     <input id="comment" type="text" formControlName="comment" class="form-control" placeholder="Give me feedback"/>
   </div>
   <div class="form-check form-switch mt-3 mb-3">
-    <label for="responseRequired" class="form-check-label">Need response?</label>
+    <label for="responseRequired" class="form-check-label" id="label-text">Need response?</label>
     <input class="form-check-input" id="responseRequired" type="checkbox" formControlName="responseRequired"/>
   </div>
   <div class="text-center">

@@ -11,3 +11,19 @@
   width: 100%;
   object-fit: contain;
 }
+
+#image-card{
+  object-fit: cover;
+}
+
+#blog-card{
+  cursor: pointer;
+}
+
+#blog-card-body {
+  background-color: rgb(103, 225, 103);
+}
+
+#card-text{
+  color: black;
+}

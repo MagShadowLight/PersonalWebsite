@@ -2,23 +2,9 @@
 
 <!--TODO: Create element to display feedbacks-->
 <div class="feedback-list-container container-fluid row spacer">
-    <div class="card col-lg-4 col-md-6 col-sm-12 text-center bg-info column-gap-4 border-5 border-white mb-3" *ngFor="let feedbackItem of (feedback | async)">
+    <div class="card col-lg-4 col-md-6 col-sm-12 text-center column-gap-4 border-5 border-white mb-3" id="feedback-card" routerLink="{{ feedbackItem.id }}" *ngFor="let feedbackItem of (feedback | async)">
       <h1>{{ feedbackItem.feedbackName }}</h1>
       <p>{{ feedbackItem.email }}</p>
-      <p>{{ feedbackItem.feedbackComment }}</p>
-      <div>
-        <label>Need Response?</label>
-        <p *ngIf="(feedbackItem!.neededResponse)">Yes</p>
-        <p *ngIf="!(feedbackItem!.neededResponse)">No</p>
-      </div>
-      <div>
-        <label>Resolved?</label>
-        <p *ngIf="(feedbackItem!.isResolved)">Yes</p>
-        <p *ngIf="!(feedbackItem!.isResolved)">No</p>
-      </div>
-      <div class="mb-4">
-        <button class="btn btn-primary" routerLink="{{ feedbackItem.id }}">View this feedback</button>
-      </div>
     </div>
 </div>
 

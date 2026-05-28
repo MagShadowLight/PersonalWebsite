@@ -4,3 +4,7 @@
 .spacer {
   margin-bottom: 500px;
 }
+#feedback-card {
+  cursor: pointer;
+  background-color: rgb(103, 225, 103);
+}

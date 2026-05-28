@@ -14,9 +14,11 @@ import { AuthService } from '../../Services/auth.service';
 export class PortfoliosDetailComponent implements OnInit{
   id: number = 0;
   portfolioItem$: BehaviorSubject<PortfolioItems>;
+  portfolioItems$: BehaviorSubject<PortfolioItems[]>;
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
     this.portfolioItem$ = this.data.portfolioItem$;
+    this.portfolioItems$ = this.data.portfolioItems$
   }
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class PortfoliosDetailComponent implements OnInit{
       this.id = +params.get('id')!;
       this.data.getPortfolioItemById(this.id);
     });
+    this.data.getAllPortfolioItems();
   }
 
   DeleteItem() {

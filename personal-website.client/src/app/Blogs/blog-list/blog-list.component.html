@@ -2,13 +2,13 @@
   {{ blogs$ | async | json}}
 </pre>-->
 <div class="blogs container-fluid row">
-  <div class="card-bg card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" *ngFor="let blogItems of (blogs$ | async)">
-    <div class="card-body">
-      <h4>{{ blogItems.title }}</h4>
-      <p>{{ blogItems.createdDate | date:'mediumDate' }}</p>
-      <p>{{ blogItems.updatedDate | date:'mediumDate' }}</p>
-      <p>{{ blogItems.category.categoryName  }}</p>
-      <button class="btn btn-primary" routerLink="{{ blogItems.id }}">View {{ blogItems.displayName }}</button>
+  <div class="card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" id="blog-card" *ngFor="let blogItems of (blogs$ | async)">
+    <div class="card-body" id="blog-card-body" routerLink="{{ blogItems.id }}">
+      <img src="{{ blogItems.blogsScreenshot.path }}" height="300" width="300" id="image-card">
+      <h4 id="card-text">{{ blogItems.title }}</h4>
+      <p id="card-text">{{ blogItems.updatedDate | date:'mediumDate' }}</p>
+      <p id="card-text">{{ blogItems.category.categoryName  }}</p>
+      <!-- <button class="btn btn-primary" routerLink="{{ blogItems.id }}">View {{ blogItems.displayName }}</button> -->
     </div>
   </div>
 </div>
