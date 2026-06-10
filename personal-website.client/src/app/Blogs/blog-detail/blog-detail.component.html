@@ -5,7 +5,8 @@
 <div class="container">
   <div class="row">
     <div class="col col-lg-12">
-      <img src="{{(blog$ | async )!.blogsScreenshot.path}}" alt="{{(blog$ | async)!.blogsScreenshot.description}}" class="image-size">
+      <!-- <img [src]="getServerPath((blog$ | async )!.blogsScreenshot.path)" alt="{{(blog$ | async)!.blogsScreenshot.description}}" class="image-size"> -->
+      <img src="images/PlaceholderImage.png" alt="{{(blog$ | async)!.blogsScreenshot.description}}" class="image-size">
     </div>
   </div>
 </div>
@@ -32,7 +33,8 @@
     <div class="col col-lg-2">
       <div class="card text-center border-4 border-primary" id="blog-card-body" *ngFor="let blogItems of (blogs$ | async)">
         <div class="card-body" id="blog-card" routerLink="../{{ blogItems.id }}">
-          <img src="{{ blogItems.blogsScreenshot.path }}" height="100" width="100" id="image-card">
+          <!-- <img [src]="getServerPath(blogItems.blogsScreenshot.path)" height="100" width="100" id="image-card"> -->
+          <img src="images/PlaceholderImage.png" height="100" width="100" id="image-card">
           <h4>{{ blogItems.title }}</h4>
           <p>{{ blogItems.updatedDate | date:'mediumDate' }}</p>
           <p>{{ blogItems.category.categoryName  }}</p>

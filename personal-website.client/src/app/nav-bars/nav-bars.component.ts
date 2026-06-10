@@ -27,16 +27,21 @@ export class NavBarsComponent {
   }
 
   logout(): void {
+    console.log("Logout have hit");
     this.loggingOutBool = true;
     this.auth.logout().pipe(
-      finalize(() => this.loggingOutBool = false)
+      finalize(() => {
+        this.loggingOutBool = false;
+        this.router.navigate(['/']);
+      })
     ).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        console.log("Logging out");
       },
       error: (errorMessage : any) => {
+        console.log("Log out failed");
         console.error('Logout error:', errorMessage)
-        this.router.navigate(['/'])
+        // this.router.navigate(['/'])
       }
     }
 

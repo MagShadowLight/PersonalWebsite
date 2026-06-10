@@ -5,6 +5,7 @@ import { BehaviorSubject, Subscription, switchMap } from 'rxjs';
 import { DataService } from '../../data.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Category } from '../../models/ICategory';
+import { BlogsScreenshot } from '../../models/IBlogScreenshot';
 
 @Component({
   selector: 'app-blog-edit',
@@ -44,6 +45,8 @@ export class BlogEditComponent implements OnInit, OnDestroy {
   //    postedItem: []
   //}
   isEditing: boolean = false;
+  selectedScreenshotFile: File | null = null;
+  uploadError: string = '';
 
   blogForm: FormGroup = new FormGroup({});
   subscription: Subscription
@@ -120,7 +123,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
       blogScreenshot: this.formBuilder.group({
         blogScreenshotId:[0],
         path: [' '],
-        description: [' ']
+        description: ['']
       })
     });
   }
@@ -137,7 +140,32 @@ export class BlogEditComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSaveButton() {
+  // onSelectedScreenshot(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   this.selectedScreenshotFile = input.files && input.files.length > 0 ? input.files[0] : null;
+  //   this.uploadError = '';
+  // }
+
+  async onSaveButton() {
+    // if (this.selectedScreenshotFile) {
+    //   const description = this.blogForm.value.blogScreenshot?.description ?? '';
+    //   const screenshotId = this.blogForm.value.blogScreenshot?.id ?? '';
+
+    //   await this.data.uploadBlogScreenshot(this.selectedScreenshotFile, description).subscribe((screenshot: BlogsScreenshot) => {
+    //     this.blogForm.patchValue({
+    //       blogsScreenshotId: screenshot.blogsScreenshotId,
+    //       blogsScreenshot: screenshot
+    //     });
+    //     this.blogForm.get('blogsScreenshot')?.patchValue({
+    //       path: screenshot.path
+    //     });
+    //   },
+    // (error: any) => {
+    //   this.uploadError = "Error: Unable to upload screenshot";
+    //   console.error(this.uploadError, error);
+    // })
+    // }
+
     const savedBlog: Blogs = {
         id: this.blogForm.value.id,
         displayName: this.blogForm.value.displayName,
@@ -155,7 +183,7 @@ export class BlogEditComponent implements OnInit, OnDestroy {
 
     console.log(savedBlog);
     if (this.isEditing) {
-      this.data.updateBlog(this.blog.id, savedBlog).subscribe((result : any) => {
+      await this.data.updateBlog(this.blog.id, savedBlog).subscribe((result : any) => {
         this.router.navigate(['/']);
       });
     } else {
@@ -163,16 +191,16 @@ export class BlogEditComponent implements OnInit, OnDestroy {
       //  // get CategoryId from blog
       //  const id = savedBlog.categoryId
       //  console.log(id)
-      //  // get Category from CategoryId
+      //  // get Category from CategoryIduploadBlogScreenshot
       //  this.data.getCategoryInfoById(id).subscribe((category : Category) => {
       //    this.category = category;
-      //    console.log(this.category);
+      //    console.log(this.category);uploadBlogScreenshot
       //  })
       //  console.log(this.category);
       //  // place Category in Blogs
       //  savedBlog.category = this.category;
       this.blog = savedBlog
-      this.data.createBlog(savedBlog).subscribe((result : any) => {
+      await this.data.createBlog(savedBlog).subscribe((result : any) => {
         //console.log('Data should go through with category')
         this.router.navigate(['/blog']);
       },

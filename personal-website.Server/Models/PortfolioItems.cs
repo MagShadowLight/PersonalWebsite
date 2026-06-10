@@ -18,9 +18,9 @@ namespace personal_website.Server.Models
         public int? CategoryId { get; set; }
         // Related Data Categories
         public virtual Categories? Category { get; set; }
-        [ForeignKey(nameof(PortfolioItemImages.Id))]
-        public int ImageID { get; set; }
-        public PortfolioItemImages Image { get; set; }
+        // [ForeignKey(nameof(PortfolioItemImages.Id))]
+        // public int ImageID { get; set; }
+        // public PortfolioItemImages Image { get; set; }
 
     }
 }

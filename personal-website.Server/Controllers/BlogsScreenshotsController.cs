@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,12 @@ namespace personal_website.Server.Controllers
     public class BlogsScreenshotsController : ControllerBase
     {
         private readonly personal_websiteServerContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public BlogsScreenshotsController(personal_websiteServerContext context)
+        public BlogsScreenshotsController(personal_websiteServerContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: api/BlogsScreenshots
@@ -82,6 +85,47 @@ namespace personal_website.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<BlogsScreenshot>> PostBlogsScreenshot(BlogsScreenshot blogsScreenshot)
         {
+            _context.BlogsScreenshot.Add(blogsScreenshot);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBlogsScreenshot", new { id = blogsScreenshot.BlogsScreenshotId }, blogsScreenshot);
+        }
+        [HttpPost("upload")]
+        public async Task<ActionResult<BlogsScreenshot>> UploadBlogsScreenshot(IFormFile file, [FromForm] string? description)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file was uploaded.");
+            }
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+
+            if (!allowedExtensions.Contains(extension))
+            {
+                return BadRequest("Only JPG, PNG, GIF, and WEBP images are allowed.");
+            }
+
+            var imagesDirectory = Path.Combine(_environment.ContentRootPath, "Images");
+            Directory.CreateDirectory(imagesDirectory);
+
+            var originalName = Path.GetFileNameWithoutExtension(file.FileName);
+            var safeName = string.Join("-", originalName.Split(Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries)).Trim();
+            var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
+            var fileName = $"{(string.IsNullOrWhiteSpace(safeName) ? "image" : safeName)}-{timestamp}{extension}";
+            var filePath = Path.Combine(imagesDirectory, fileName);
+
+            await using (var stream = System.IO.File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var blogsScreenshot = new BlogsScreenshot
+            {
+                Path = filePath,
+                Description = description ?? Path.GetFileNameWithoutExtension(file.FileName)
+            };
+
             _context.BlogsScreenshot.Add(blogsScreenshot);
             await _context.SaveChangesAsync();
 

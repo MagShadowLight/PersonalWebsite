@@ -303,8 +303,8 @@ namespace personal_website.Server.Data
                         Links = "github.com",
                         CategoryId = 2,
                         Category = null,
-                        Image = null,
-                        ImageID = 1
+                        // Image = null,
+                        // ImageID = 1
                     },
                     new PortfolioItems
                     {
@@ -318,8 +318,8 @@ namespace personal_website.Server.Data
                         Links = "example.com",
                         CategoryId = 7,
                         Category = null,
-                        Image = null,
-                        ImageID = 2
+                        // Image = null,
+                        // ImageID = 2
                     },
                     new PortfolioItems
                     {
@@ -333,8 +333,8 @@ namespace personal_website.Server.Data
                         Links = "gitlab.com",
                         CategoryId = 3,
                         Category = null,
-                        Image = null,
-                        ImageID = 3
+                        // Image = null,
+                        // ImageID = 3
                     }
                 );
 
@@ -350,11 +350,11 @@ namespace personal_website.Server.Data
                 .HasForeignKey(p => p.CategoryId)
                 .IsRequired(false);
 
-            modelBuilder.Entity<PortfolioItemImages>()
-                .HasOne(i => i.Items)
-                .WithOne(i => i.Image)
-                .HasForeignKey<PortfolioItems>(i => i.ImageID)
-                .IsRequired(false);
+            // modelBuilder.Entity<PortfolioItemImages>()
+            //     .HasOne(i => i.Items)
+            //     .WithOne(i => i.Image)
+            //     .HasForeignKey<PortfolioItems>(i => i.ImageID)
+            //     .IsRequired(false);
 
             modelBuilder.Entity<Blogs>()
                 .HasOne(i => i.BlogsScreenshot)
@@ -366,7 +366,7 @@ namespace personal_website.Server.Data
             modelBuilder.Entity<Categories>().Navigation(c => c.PostedBlogs).AutoInclude();
             modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Category).AutoInclude();
             modelBuilder.Entity<Categories>().Navigation(c => c.PostedItems).AutoInclude();
-            modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Image).AutoInclude();
+            // modelBuilder.Entity<PortfolioItems>().Navigation(c => c.Image).AutoInclude();
             modelBuilder.Entity<Blogs>().Navigation(c => c.BlogsScreenshot).AutoInclude();
 
             //modelBuilder.Entity<Categories>().Property(b => b.Id)

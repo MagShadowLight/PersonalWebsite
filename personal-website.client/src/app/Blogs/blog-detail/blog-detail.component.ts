@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Blogs } from '../../models/IBlogs';
 import { AuthService } from '../../Services/auth.service';
 import { Category } from '../../models/ICategory';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-blog-detail',
@@ -13,11 +14,14 @@ import { Category } from '../../models/ICategory';
   styleUrl: './blog-detail.component.css'
 })
 export class BlogDetailComponent implements OnInit{
+  private readonly serverBaseUrl = `${environment.apiUrl}/Images`;
+
 
   id: number = 0;
   blog$: BehaviorSubject<Blogs>;
   blogs$: BehaviorSubject<Blogs[]>;
   categories$: BehaviorSubject<Category[]>;
+  
 
 
   constructor(private data: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService ) {
@@ -63,5 +67,12 @@ export class BlogDetailComponent implements OnInit{
 
   isAuthenticated() : boolean {
     return this.auth.isAuthenticated();
+  }
+
+  getServerPath(path: string | undefined) : string {
+    if (!path)
+      return '';
+    const filename = path.replace(/\\/g, "/").split('/').pop();
+    return filename ? `${this.serverBaseUrl}/${filename.replace(/\.[^/.]+$/,'.jpg')}` : '';
   }
 }

@@ -5,6 +5,7 @@ import { Blogs } from '../../models/IBlogs';
 import { Category } from '../../models/ICategory';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { environment } from '../../../environments/environment.development';
 
 //interface BlogList extends Blogs {
 //  Id: number;
@@ -28,7 +29,8 @@ import { AuthService } from '../../Services/auth.service';
 
 
 export class BlogListComponent implements OnInit {
-
+  private readonly serverBaseUrl = `${environment.apiUrl}/Images`;
+  
   blogs$: BehaviorSubject<Blogs[]>;
   categories$: BehaviorSubject<Category[]>;
   
@@ -55,5 +57,12 @@ export class BlogListComponent implements OnInit {
 
   CreateBlog(): void {
     this.router.navigate(['blog', 'create'])
+  }
+
+  getServerPath(path: string | undefined) : string {
+    if (!path)
+      return '';
+    const filename = path.replace(/\\/g, "/").split('/').pop();
+    return filename ? `${this.serverBaseUrl}/${filename.replace(/\.[^/.]+$/,'.jpg')}` : '';
   }
 }

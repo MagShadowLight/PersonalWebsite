@@ -31,4 +31,11 @@
     <ProjectReference Include="..\personal-website.core\personal-website.core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Images\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

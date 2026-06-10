@@ -4,7 +4,8 @@
 <div class="container">
   <div class="row">
     <div class="col col-lg-12">
-      <img src="{{ (portfolioItem$ | async)!.image.path }}" alt="{{ (portfolioItem$ | async)!.image.description }}" class="image-size">
+      <!-- <img [src]="getServerPath((portfolioItem$ | async)!.image.path)" alt="{{ (portfolioItem$ | async)!.image.description }}" class="image-size"> -->
+       <img src="images/PlaceholderImage.png">
     </div>
   </div>
 </div>
@@ -34,7 +35,8 @@
     <div class="col col-lg-2">
       <div class="card text-center border-4 border-primary" id="portfolio-card-body" *ngFor="let portfolioItem of (portfolioItems$ | async)">
         <div class="card-body" id="portfolio-card" routerLink="../{{ portfolioItem.id }}">
-          <img src="{{ portfolioItem.image.path }}" height="100" width="100" id="image-card">
+          <!-- <img [src]="getServerPath(portfolioItem.image.path)" height="100" width="100" id="image-card"> -->
+          <img src="images/PlaceholderImage.png" height="100" width="100" id="image-card">
           <h4 id="card-text">{{ portfolioItem.title }}</h4>
           <p id="card-text">{{ portfolioItem.updatedDate | date:'mediumDate' }}</p>
           <p id="card-text">{{ portfolioItem.version }}</p>

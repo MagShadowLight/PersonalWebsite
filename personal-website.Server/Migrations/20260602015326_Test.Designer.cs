@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using personal_website.Server.Data;
 
@@ -10,9 +11,11 @@ using personal_website.Server.Data;
 namespace personal_website.Server.Migrations
 {
     [DbContext(typeof(personal_websiteServerContext))]
-    partial class personal_websiteServerContextModelSnapshot : ModelSnapshot
+    [Migration("20260602015326_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -491,9 +494,6 @@ namespace personal_website.Server.Migrations
                     b.Property<long>("FileSize")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ItemsId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -503,8 +503,6 @@ namespace personal_website.Server.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemsId");
 
                     b.ToTable("PortfolioItemImages");
 
@@ -555,6 +553,9 @@ namespace personal_website.Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ImageID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Links")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -574,6 +575,9 @@ namespace personal_website.Server.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("ImageID")
+                        .IsUnique();
+
                     b.ToTable("PortfolioItems");
 
                     b.HasData(
@@ -584,6 +588,7 @@ namespace personal_website.Server.Migrations
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cat pic",
                             DisplayName = "Cat",
+                            ImageID = 1,
                             Links = "github.com",
                             Title = "Cat",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -596,6 +601,7 @@ namespace personal_website.Server.Migrations
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Taco pic",
                             DisplayName = "Taco",
+                            ImageID = 2,
                             Links = "example.com",
                             Title = "Taco",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -608,6 +614,7 @@ namespace personal_website.Server.Migrations
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Dog pic",
                             DisplayName = "Dog",
+                            ImageID = 3,
                             Links = "gitlab.com",
                             Title = "Dog",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -681,22 +688,19 @@ namespace personal_website.Server.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("personal_website.Server.Models.PortfolioItemImages", b =>
-                {
-                    b.HasOne("personal_website.Server.Models.PortfolioItems", "Items")
-                        .WithMany()
-                        .HasForeignKey("ItemsId");
-
-                    b.Navigation("Items");
-                });
-
             modelBuilder.Entity("personal_website.Server.Models.PortfolioItems", b =>
                 {
                     b.HasOne("personal_website.Server.Models.Categories", "Category")
                         .WithMany("PostedItems")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("personal_website.Server.Models.PortfolioItemImages", "Image")
+                        .WithOne("Items")
+                        .HasForeignKey("personal_website.Server.Models.PortfolioItems", "ImageID");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("personal_website.Server.Models.BlogsScreenshot", b =>
@@ -709,6 +713,11 @@ namespace personal_website.Server.Migrations
                     b.Navigation("PostedBlogs");
 
                     b.Navigation("PostedItems");
+                });
+
+            modelBuilder.Entity("personal_website.Server.Models.PortfolioItemImages", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,8 @@
 <div class="portfolio container-fluid row">
   <div class="bg-info card col-xl-4 col-md-6 col-sm-12 text-center border-4 border-primary" *ngFor="let Items of (portfolioItems$ | async)">
     <div class="card-body" routerLink="{{ Items.id }}" id="portfolio-card-body">
-      <img src="{{ Items.image.path }}" height="300" width="300">
+      <!-- <img [src]="getServerPath(Items.image.path)" height="300" width="300"> -->
+       <img src="images/PlaceholderImage.png" height="300" width="300">
       <h4 class="card-text">{{ Items.title }}</h4>
       <p class="card-text">{{ Items.updatedDate | date:'mediumDate' }}</p>
       <p class="card-text">{{ Items.version }}</p>

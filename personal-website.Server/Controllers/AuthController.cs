@@ -34,6 +34,7 @@ namespace personal_website.Server.Controllers
         }
 
         // POST: api/Auth/register
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto Regmodel)
         {
@@ -113,6 +114,7 @@ namespace personal_website.Server.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
+            _logger.LogInformation("Logout have hit");
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User have logged out.");
             return Ok(new { message = "User have logged out successfully" });

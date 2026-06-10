@@ -84,6 +84,9 @@ namespace personal_website.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Blogs>> PostBlogs(Blogs blogs)
         {
+            Console.WriteLine(blogs.BlogsScreenshot.Path);
+            Console.WriteLine(blogs.BlogsScreenshot.BlogsScreenshotId);
+            Console.WriteLine(blogs.BlogsScreenshot.Description);
             var file = new FileData();
             //string path = "C:\\Users\\Willi\\OneDrive\\Desktop\\Side Projects\\Personal Website\\personal-website.Server\\Logs";
             string path = Path.Combine("Data", "Blogs.txt");

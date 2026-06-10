@@ -5,6 +5,7 @@ import { DataService } from '../../data.service';
 import { PortfolioItems } from '../../models/IPortfolioItems';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-portfolios-list',
@@ -13,6 +14,8 @@ import { AuthService } from '../../Services/auth.service';
   styleUrl: './portfolios-list.component.css'
 })
 export class PortfoliosListComponent implements OnInit {
+  private readonly serverBaseUrl = `${environment.apiUrl}/Images`;
+  
 
   portfolioItems$: BehaviorSubject<PortfolioItems[]>;
 
@@ -33,4 +36,10 @@ export class PortfoliosListComponent implements OnInit {
     this.router.navigate(['portfolio', 'create'])
   }
 
+  getServerPath(path: string | undefined) : string {
+    if (!path)
+      return '';
+    const filename = path.replace(/\\/g, "/").split('/').pop();
+    return filename ? `${this.serverBaseUrl}/${filename.replace(/\.[^/.]+$/,'.jpg')}` : '';
+  }
 }
